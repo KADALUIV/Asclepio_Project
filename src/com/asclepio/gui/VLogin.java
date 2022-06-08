@@ -92,7 +92,7 @@ public class VLogin extends JFrame {
 	}
 
 	public void setControlador(AppControl control) {
-		// TODO Auto-generated method stub
+		btnLogin.addActionListener(control);
 		
 	}
 

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import com.asclepio.db.sql.SqlQuery;
 import com.asclepio.gui.VLogin;
 import com.asclepio.gui.VPrincipal;
 import com.asclepio.model.Usuario;
@@ -13,12 +14,16 @@ public class AppControl implements ActionListener {
 	
 	VPrincipal vP;
 	VLogin vL;
+	private int contAcces;
+	SqlQuery sql;
 	
 	
 
 	public AppControl(VPrincipal vP, VLogin vL) {
 		this.vP = vP;
 		this.vL = vL;
+		this.sql = new SqlQuery();
+		contAcces = 0;
 	}
 
 
@@ -37,9 +42,16 @@ public class AppControl implements ActionListener {
 
 
 	private void obtenerUsuario() {
+		boolean acceso = true;
 		Usuario user = vL.comprobarDatos();
 		
-		//TODO
+		if (user != null) {
+			contAcces++;
+			
+			String pwd = sql.consultarPwdxUser(user.getIdUsuario());
+			
+		}
+		
 		
 	}
 

@@ -64,6 +64,12 @@ public class VLogin extends JFrame {
 		setSize(ANCHO, ALTO);
 		centrarVentana();
 	}
+	
+	
+
+	public JPasswordField getTxtPwd() {
+		return txtPwd;
+	}
 
 	private void centrarVentana() {
 		
@@ -95,6 +101,7 @@ public class VLogin extends JFrame {
 
 	public void setControlador(AppControl control) {
 		btnLogin.addActionListener(control);
+		txtPwd.addActionListener(control);
 		
 	}
 

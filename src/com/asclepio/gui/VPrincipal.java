@@ -88,7 +88,13 @@ public class VPrincipal extends JFrame {
 	}
 
 	public void setControlador(AppControl control) {
-		// TODO Auto-generated method stub
+		itemMenuLogOut.addActionListener(control);
+		itemMenuExit.addActionListener(control);
 		
 	}
+	
+	public void hacerVisible() {
+		setVisible(true);
+	}
+	
 }

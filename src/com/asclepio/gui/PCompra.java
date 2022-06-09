@@ -51,6 +51,8 @@ public class PCompra extends JPanel {
 	private JSpinner spinner;
 	private JScrollPane scrpLista;
 	
+	private ArrayList<Producto> datosLista;
+	
 	public PCompra() {
 		setBackground(Color.WHITE);
 		init();
@@ -170,6 +172,7 @@ public class PCompra extends JPanel {
 	}
 	
 	public void showList(ArrayList<Producto> lista) {
+		datosLista = lista;
 		list.setModel(dlm);
 		
 		dlm.addAll(lista);
@@ -189,6 +192,14 @@ public class PCompra extends JPanel {
 	
 	public JList<Producto> getList(){
 		return list;
+	}
+	
+	public String getSelectedRow() {
+		Producto item = list.getSelectedValue();
+		String id = item.getIdProducto();
+		System.out.println(list.getSelectedValue());
+		return id;
+		
 	}
 
 	public void setControlador(AppControl control) {

@@ -9,12 +9,11 @@ import com.asclepio.gui.PStock;
 import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-
-import com.asclepio.db.sql.SqlQuery;
 import javax.swing.JOptionPane;
 
-import com.asclepio.db.sql.SqlQuery;
+
 import com.asclepio.gui.PCompra;
+import com.asclepio.gui.PHistorial;
 import com.asclepio.gui.VLogin;
 import com.asclepio.gui.VPrincipal;
 import com.asclepio.model.Usuario;
@@ -32,15 +31,16 @@ public class AppControl implements ActionListener {
 	private int contAcces;
 	SqlQuery sql;
 	PStock pSto;
-	
+	PHistorial pHist;
 	
 
-	public AppControl(VPrincipal vp, VLogin vl, PCompra pC, PStock pSto) {
+	public AppControl(VPrincipal vp, VLogin vl, PCompra pC, PStock pSto, PHistorial pHist) {
 		this.vp = vp;
 		this.vl = vl;
 		this.pC = pC;
 		this.pSto = pSto;
 		this.sql = new SqlQuery();
+		this.pHist = pHist;
 		contAcces = 0;
 		listaProd = new ArrayList<Producto>();
 	}
@@ -65,7 +65,9 @@ public class AppControl implements ActionListener {
 				
 			}else if (e.getActionCommand().equals(VPrincipal.BTN_HISTORIAL_C)) {
 				
-			}
+			}else if (e.getActionCommand().equals(PHistorial.BTN_CONSULTAR)) {
+				pHist.consultarProductos();
+			}	
 		}else if(e.getSource() instanceof JMenuItem){
 			
 			if (e.getActionCommand().equals(VPrincipal.ITEM_MENU_LOGOUT)) {
@@ -151,5 +153,4 @@ public class AppControl implements ActionListener {
 		
 		
 	}
-
 }

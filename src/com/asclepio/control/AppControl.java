@@ -8,6 +8,10 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 import com.asclepio.db.sql.SqlQuery;
+import javax.swing.JOptionPane;
+
+import com.asclepio.db.sql.SqlQuery;
+import com.asclepio.gui.PCompra;
 import com.asclepio.gui.VLogin;
 import com.asclepio.gui.VPrincipal;
 import com.asclepio.model.Usuario;
@@ -17,14 +21,16 @@ public class AppControl implements ActionListener {
 	private static final int TOTAL_INTENTOS = 3;
 	VPrincipal vp;
 	VLogin vl;
+	PCompra pC;
 	private int contAcces;
 	SqlQuery sql;
 	
 	
 
-	public AppControl(VPrincipal vp, VLogin vl) {
+	public AppControl(VPrincipal vp, VLogin vl, PCompra pC) {
 		this.vp = vp;
 		this.vl = vl;
+		this.pC = pC;
 		this.sql = new SqlQuery();
 		contAcces = 0;
 	}
@@ -33,6 +39,43 @@ public class AppControl implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() instanceof JButton) {
+			if(e.getActionCommand().equals(PCompra.BTN_BUSQ)) {
+				searchProd();
+			}else if(e.getActionCommand().equals(PCompra.BTN_CARRITO)) {
+				addCarrito();
+			}
+		}
+	}
+
+
+
+	private void addCarrito() {
+		if(pC.getList().getSelectedIndex() == -1) {
+			JOptionPane.showMessageDialog(pC, "Debe seleccionar el elemento a a�adir", "Error de selecci�n",
+					JOptionPane.ERROR_MESSAGE);
+		}else {
+			String id = pC.getSelectedRow();
+			
+		//	p.getProduct();
+		}
+		
+	}
+
+
+
+	private void searchProd() {
+		
+		//pC.showList(p.getProducts());
+		
+		if(pC.getTxtBusq().isEmpty()) {
+			pC.showList(p.getProducts());
+		}else {
+			String busq = pC.getTxtBusq();
+			pC.showList(p.getSearchedProd(busq));
+			
+			
+		}
 		
 		if (e.getSource() instanceof JButton) {
 			

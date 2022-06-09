@@ -54,7 +54,7 @@ public class AppControl implements ActionListener {
 				searchProd();
 			}else if(e.getActionCommand().equals(PCompra.BTN_CARRITO)) {
 				addCarrito();
-			}else if(e.getActionCommand().equals(pSto.BTN_BUSQUEDA)) {
+			}else if(e.getActionCommand().equals(PStock.BTN_BUSQUEDA)) {
 			
 			listaProd = sql.verStock();
 			}else if (e.getActionCommand().equals(VLogin.BTN_LOGIN) || e.getSource().equals(vl.getTxtPwd())) {
@@ -98,10 +98,10 @@ public class AppControl implements ActionListener {
 		//pC.showList(p.getProducts());
 		
 		if(pC.getTxtBusq().isEmpty()) {
-			pC.showList(p.getProducts());
+			pC.showList(sql.getProducts());
 		}else {
 			String busq = pC.getTxtBusq();
-			pC.showList(p.getSearchedProd(busq));
+			pC.showList(sql.getSearchedProd(busq));
 			
 			
 		}

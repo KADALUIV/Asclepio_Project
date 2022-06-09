@@ -15,10 +15,6 @@ import com.asclepio.db.AccesoDB;
 import com.asclepio.gui.PStock;
 import com.asclepio.model.Producto;
 
-
-
-
-
 public class SqlQuery {
 	
 	private AccesoDB acceso;
@@ -32,8 +28,13 @@ public class SqlQuery {
 	public String consultarPwdxUser(int idUsuario) {
 		String pwd = null;
 		
+		
 		String query = "SELECT " + UserContract.COLUMN_PASSWD + " FROM " + UserContract.NOMBRE_TABLA + 
 						" WHERE " + UserContract.COLUMN_IDUSUARIO + " = ?";
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rslt = null;
 
 						try {
 							con = acceso.getConnection();

@@ -59,8 +59,10 @@ public class AppControl implements ActionListener {
 				listaProd = sql.verStock();
 				
 			}else if(e.getActionCommand().equals(PStock.BTN_REPONER_PSTOCK)) {
+				String idStock = pSto.productoSeleccionado();
+				int cantidad = pSto.cantidadReponer();
 				
-				
+				sql.reponerStock(idStock, cantidad);
 				
 			}else if (e.getActionCommand().equals(VLogin.BTN_LOGIN) || e.getSource().equals(vl.getTxtPwd())) {
 				obtenerUsuario();

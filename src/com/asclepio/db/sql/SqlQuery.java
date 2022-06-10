@@ -311,4 +311,9 @@ public class SqlQuery {
 	 	return productos;
 		
 	}
+
+	public void reponerStock(String idStock, int cantidad) {
+		// TODO Auto-generated method stub
+		
+	}
 }

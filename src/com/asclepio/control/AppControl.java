@@ -2,6 +2,7 @@ package com.asclepio.control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import com.asclepio.db.sql.SqlQuery;
@@ -19,10 +20,10 @@ import com.asclepio.gui.VPrincipal;
 import com.asclepio.model.Usuario;
 
 import com.asclepio.model.Producto;
-
+import com.asclepio.model.ProductoCompra;
 
 public class AppControl implements ActionListener {
-	
+
 	private static final int TOTAL_INTENTOS = 3;
 	private static ArrayList<Producto> listaProd;
 	VPrincipal vp;
@@ -34,10 +35,10 @@ public class AppControl implements ActionListener {
 	PHistorial ph;
 	
 
-	public AppControl(VPrincipal vp, VLogin vl, PCompra pC, PStock ps, PHistorial pHist) {
+	public AppControl(VPrincipal vp, VLogin vl, PCompra pc, PStock ps, PHistorial pHist) {
 		this.vp = vp;
 		this.vl = vl;
-		this.pc = pC;
+		this.pc = pc;
 		this.ps = ps;
 		this.sql = new SqlQuery();
 		this.ph = pHist;
@@ -45,18 +46,22 @@ public class AppControl implements ActionListener {
 		listaProd = new ArrayList<Producto>();
 	}
 
-
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() instanceof JButton || e.getSource() instanceof JTextField) {
 			if(e.getActionCommand().equals(PCompra.BTN_BUSQ)) {
 				searchProd();
-			}else if(e.getActionCommand().equals(PCompra.BTN_CARRITO)) {
+			} else if (e.getActionCommand().equals(PCompra.BTN_CARRITO)) {
 				addCarrito();
-			}else if(e.getActionCommand().equals(PStock.BTN_BUSQUEDA_PSTOCK)) {
+			}else if (e.getActionCommand().equals(PCompra.BTN_COMPRAR)) {
+				buyProducts();
+			} else if (e.getActionCommand().equals(PCompra.BTN_ELIMINAR)) {
+				deleteProd();
+			} else if(e.getActionCommand().equals(PStock.BTN_BUSQUEDA_PSTOCK)) {
 				
-				listaProd = sql.verStock();
+				String palabra = PStock.obtenerTexto();
+				listaProd = sql.getSearchedProd(palabra);
+				ps.filtrarTabla(listaProd);
 				
 			}else if(e.getActionCommand().equals(PStock.BTN_REPONER_PSTOCK)) {
 				String idStock = ps.productoSeleccionado();
@@ -84,11 +89,9 @@ public class AppControl implements ActionListener {
 			
 				vp.uploadPanel(ph);
 				vp.hacerVisible(true);
-				
-			}else if (e.getActionCommand().equals(PHistorial.BTN_CONSULTAR)) {
-			
-			
-				ph.consultarProductos();
+
+			}else if (button.getToolTipText().equals(PHistorial.BTN_CONSULTAR)) {
+				this.consultarProductos();
 			}	
 		}else if(e.getSource() instanceof JMenuItem){
 			
@@ -105,12 +108,20 @@ public class AppControl implements ActionListener {
 					System.exit(0);
 				}
 				
-			}
+			} 
 		}
+
+	}
+
+	private void deleteProd() {
+		// TODO Auto-generated method stub
 		
 	}
 
-
+	private void buyProducts() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	private void backLogin() {
 		vp.dispose();
@@ -123,75 +134,97 @@ public class AppControl implements ActionListener {
 
 
 	private void addCarrito() {
-		if(pc.getList().getSelectedIndex() == -1) {
+		if (pc.getList().getSelectedIndex() == -1) {
 			JOptionPane.showMessageDialog(pc, "Debe seleccionar el elemento a a�adir", "Error de selecci�n",
 					JOptionPane.ERROR_MESSAGE);
-		}else {
-			String id = pc.getSelectedRow();
+		} else {
 			
-		//	p.getProduct();
+			pc.habilitarCompList(true);
+
+			Producto prod = pc.getSelectedProd();
+
+			int cant = pc.getSpn();
+			//String error = "";
+			
+			if(cant <= 0 && cant > prod.getStock()) {
+				pc.setError("La cantidad debe ser mayor que 0 y menor que la de Stock");
+			}else {
+				int result = sql.updateStock(cant, prod.getIdProducto());
+				
+				if(result < 0 ) {
+					pc.setError("Error en la base de datos");
+				}else {
+					pc.rellenarTabla(prod, cant);
+				}
+				
+				
+			}
+
+			
 		}
-		
+
 	}
-
-
 
 	private void searchProd() {
-		
-		//pC.showList(p.getProducts());
-		
-		if(pc.getTxtBusq().isEmpty()) {
+
+		// pC.showList(p.getProducts());
+
+		if (pc.getTxtBusq().isEmpty()) {
 			pc.showList(sql.getProducts());
-		}else {
+		} else {
 			String busq = pc.getTxtBusq();
 			pc.showList(sql.getSearchedProd(busq));
-			
-			
+
 		}
-		
-		
+
 	}
-
-
 
 	private void obtenerUsuario() {
 		boolean acceso = true;
 		Usuario user = vl.comprobarDatos();
-		
+
 		if (user != null) {
 			contAcces++;
-			
+
 			String pwd = sql.consultarPwdxUser(user.getIdUsuario());
 			String error = "";
-			
+
 			if (pwd == null) {
 				error = "El id usuario no existe";
-				
-			}else if (!pwd.equals(user.getPwd())) {
+
+			} else if (!pwd.equals(user.getPwd())) {
 				error = "La password introducida no es correcta.";
-				
-			}else {
+
+			} else {
 				acceso = false;
 				vl.dispose();
 				vp.showVPrincipal();
 			}
-			
+
 			if (acceso) {
 				if (contAcces < 3) {
 					error += "Te qudan " + (TOTAL_INTENTOS - contAcces) + " intentos";
 					vl.setError(error);
-					
-				}else {
+
+				} else {
 					error += "\nSe han agotado los tres intentos la aplicación se va a cerrar";
-					vl.setError(error); 
+					vl.setError(error);
 					System.exit(0);
 				}
-				
+
 			}
-			
-			
+
 		}
+
+	}
+	
+	public void consultarProductos() {
 		
+		String fecha = ph.getFecha();
+		
+		SqlQuery productoContract = new SqlQuery();
+		ArrayList<ProductoCompra> productos = productoContract.consultarProductos(fecha);
+		ph.rellenarTabla(productos);	
 		
 	}
 }

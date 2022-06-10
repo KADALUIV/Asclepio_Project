@@ -58,7 +58,7 @@ public class AppControl implements ActionListener {
 			} else if(e.getActionCommand().equals(PStock.BTN_BUSQUEDA_PSTOCK)) {
 				
 				String palabra = PStock.obtenerTexto();
-				listaProd = sql.verStock(palabra);
+				listaProd = sql.getSearchedProd(palabra);
 				ps.filtrarTabla(listaProd);
 				
 			}else if(e.getActionCommand().equals(PStock.BTN_REPONER_PSTOCK)) {

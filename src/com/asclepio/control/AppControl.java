@@ -27,20 +27,20 @@ public class AppControl implements ActionListener {
 	private static ArrayList<Producto> listaProd;
 	VPrincipal vp;
 	VLogin vl;
-	PCompra pC;
+	PCompra pc;
 	private int contAcces;
 	SqlQuery sql;
-	PStock pSto;
-	PHistorial pHist;
+	PStock ps;
+	PHistorial ph;
 	
 
 	public AppControl(VPrincipal vp, VLogin vl, PCompra pC, PStock pSto, PHistorial pHist) {
 		this.vp = vp;
 		this.vl = vl;
-		this.pC = pC;
-		this.pSto = pSto;
+		this.pc = pC;
+		this.ps = pSto;
 		this.sql = new SqlQuery();
-		this.pHist = pHist;
+		this.ph = pHist;
 		contAcces = 0;
 		listaProd = new ArrayList<Producto>();
 	}
@@ -67,19 +67,38 @@ public class AppControl implements ActionListener {
 			}else if (e.getActionCommand().equals(VLogin.BTN_LOGIN) || e.getSource().equals(vl.getTxtPwd())) {
 				obtenerUsuario();
 			}else if (e.getActionCommand().equals(VPrincipal.BTN_SEE_STOCK)) {
+				System.out.println("Funciona Btn Stock");
+				vp.uploadPanel(ps);
+				vp.hacerVisible(true);
+				
 				
 			}else if (e.getActionCommand().equals(VPrincipal.BTN_REGISTRAR_C)) {
+				System.out.println("Funciona Btn Resgistrar");
+				vp.uploadPanel(pc);
+				vp.hacerVisible(true);
 				
 			}else if (e.getActionCommand().equals(VPrincipal.BTN_HISTORIAL_C)) {
+				System.out.println("Funciona Btn Hostorial");
+				vp.uploadPanel(ph);
+				vp.hacerVisible(true);
 				
 			}else if (e.getActionCommand().equals(PHistorial.BTN_CONSULTAR)) {
-				pHist.consultarProductos();
+			
+			
+				ph.consultarProductos();
 			}	
 		}else if(e.getSource() instanceof JMenuItem){
 			
 			if (e.getActionCommand().equals(VPrincipal.ITEM_MENU_LOGOUT)) {
 				
 			}else if (e.getActionCommand().equals(VPrincipal.ITEM_MENU_EXIT)) {
+				
+				int option = JOptionPane.showConfirmDialog(vp, "¿Estas seguro que deseas salir?", "Confirmar Salida", 
+						JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				
+				if (option == JOptionPane.YES_OPTION) {
+					System.exit(0);
+				}
 				
 			}
 		}
@@ -89,11 +108,11 @@ public class AppControl implements ActionListener {
 
 
 	private void addCarrito() {
-		if(pC.getList().getSelectedIndex() == -1) {
-			JOptionPane.showMessageDialog(pC, "Debe seleccionar el elemento a a�adir", "Error de selecci�n",
+		if(pc.getList().getSelectedIndex() == -1) {
+			JOptionPane.showMessageDialog(pc, "Debe seleccionar el elemento a a�adir", "Error de selecci�n",
 					JOptionPane.ERROR_MESSAGE);
 		}else {
-			String id = pC.getSelectedRow();
+			String id = pc.getSelectedRow();
 			
 		//	p.getProduct();
 		}
@@ -106,11 +125,11 @@ public class AppControl implements ActionListener {
 		
 		//pC.showList(p.getProducts());
 		
-		if(pC.getTxtBusq().isEmpty()) {
-			pC.showList(sql.getProducts());
+		if(pc.getTxtBusq().isEmpty()) {
+			pc.showList(sql.getProducts());
 		}else {
-			String busq = pC.getTxtBusq();
-			pC.showList(sql.getSearchedProd(busq));
+			String busq = pc.getTxtBusq();
+			pc.showList(sql.getSearchedProd(busq));
 			
 			
 		}
@@ -139,7 +158,7 @@ public class AppControl implements ActionListener {
 			}else {
 				acceso = false;
 				vl.dispose();
-				vp.hacerVisible();
+				vp.showVPrincipal();
 			}
 			
 			if (acceso) {

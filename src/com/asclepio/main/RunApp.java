@@ -12,14 +12,7 @@ import com.asclepio.gui.VPrincipal;
 public class RunApp {
 
 	public static void main(String[] args) {
-		
-		/* UTILIZAR MAVEN Y LAS LIBRERIAS FLATLIGHTLAF
-		try {
-            UIManager.setLookAndFeel(new FlatLightLaf());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
-		
+	
 		EventQueue.invokeLater(new Runnable() {
 			
 			@Override
@@ -44,5 +37,12 @@ public class RunApp {
 		});
 
 	}
+	
+	/* UTILIZAR MAVEN Y LAS LIBRERIAS FLATLIGHTLAF
+	try {
+        UIManager.setLookAndFeel(new FlatLightLaf());
+    } catch (Exception e) {
+        e.printStackTrace();
+    }*/
 
 }

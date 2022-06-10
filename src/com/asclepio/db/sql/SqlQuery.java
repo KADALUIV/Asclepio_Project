@@ -183,9 +183,10 @@ public class SqlQuery {
 		ArrayList<Producto> listaProd = new ArrayList<Producto>();
 
 		String query = "SELECT * " + " FROM " + ProductContract.NOMBRE_TABLA;
-
-		if (PStock.obtenerTexto() != null) {
-			query = query + " WHERE " + ProductContract.COLUMN_NOM + " IS LIKE %" + PStock.obtenerTexto() + "%";
+		
+		if(PStock.obtenerTexto() != null) {
+			query = query + " WHERE " + ProductContract.COLUMN_NOM 
+					+ " LIKE '%" + palabra + "%'";
 		}
 
 		Connection con = null;
@@ -194,6 +195,27 @@ public class SqlQuery {
 
 		try {
 			con = acceso.getConnection();
+			
+			stml = con.createStatement();
+			
+			
+			rslt = stml.executeQuery(query);
+			
+		Producto prod;
+		
+		String id_producto;
+		String nombre;
+		String tipo;
+		double precio;
+		int stock;
+		
+		while (rslt.next()) {
+			
+			id_producto = rslt.getString(1);
+			nombre = rslt.getString(2);
+			tipo = rslt.getString(3);
+			precio = rslt.getDouble(4);
+			stock = rslt.getInt(5);
 
 			stml = con.createStatement();
 

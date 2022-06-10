@@ -15,14 +15,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.JSpinner;
 
 public class PStock extends JPanel{
 	
 	static final int ALTO = 600;
 	static final int ANCHO = 950;
-	public static final String BTN_VOLVER = "Volver";
-	public static final String BTN_SALIR = "Salir";
-	public static final String BTN_BUSQUEDA = "Busqueda";
+	public static final String BTN_VOLVER_PSTOCK = "Volver";
+	public static final String BTN_SALIR_PSTOCK = "Salir";
+	public static final String BTN_BUSQUEDA_PSTOCK = "Busqueda";
+	public static final String BTN_REPONER_PSTOCK = "Reponer";
 	
 	private static final String ID_PRODUCTO = "idProducto";
 	private static final String NOMBRE = "Nombre";
@@ -38,6 +40,8 @@ public class PStock extends JPanel{
 	private JButton btnsSalir;
 	private JButton btnVolver;
 	private JButton btnBuscar;
+	private JSpinner spnCantidad;
+	private JButton btnReponer;
 	
 	public PStock() {
 		setForeground(Color.BLACK);
@@ -65,24 +69,32 @@ public class PStock extends JPanel{
 		add(lblBusqueda);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(38, 185, 872, 377);
+		scrollPane.setBounds(38, 185, 872, 328);
 		add(scrollPane);
 		
 		tblStock = new JTable();
 		scrollPane.setViewportView(tblStock);
 		
-		btnsSalir = new JButton(BTN_SALIR);
+		btnsSalir = new JButton(BTN_SALIR_PSTOCK);
 		btnsSalir.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnsSalir.setBounds(855, 10, 85, 21);
 		add(btnsSalir);
 		
-		btnVolver = new JButton(BTN_VOLVER);
+		btnVolver = new JButton(BTN_VOLVER_PSTOCK);
 		btnVolver.setBounds(10, 11, 85, 21);
 		add(btnVolver);
 		
-		btnBuscar = new JButton(BTN_BUSQUEDA);
+		btnBuscar = new JButton(BTN_BUSQUEDA_PSTOCK);
 		btnBuscar.setBounds(432, 154, 85, 21);
 		add(btnBuscar);
+		
+		spnCantidad = new JSpinner();
+		spnCantidad.setBounds(856, 540, 54, 21);
+		add(spnCantidad);
+		
+		btnReponer = new JButton(BTN_REPONER_PSTOCK);
+		btnReponer.setBounds(749, 540, 85, 21);
+		add(btnReponer);
 	
 		
 		configurarTabla();
@@ -112,8 +124,7 @@ public class PStock extends JPanel{
 			tblStock.getColumn(PRECIO).setPreferredWidth(75);
 			tblStock.getColumn(STOCK).setPreferredWidth(75);
 
-			
-		
+
 	}
 
 	public void hacerVisible(boolean b) {
@@ -125,18 +136,29 @@ public class PStock extends JPanel{
 		btnBuscar.addActionListener(control);
 		btnVolver.addActionListener(control);
 		btnsSalir.addActionListener(control);
-	
+		btnReponer.addActionListener(control);
 		
 	}
 
 	public static  String obtenerTexto() {
 		
-		
 		String medicamento = txtBusqueda.getText();
-		
 		
 		return medicamento;
 	}
 	
+	public String productoSeleccionado() {
+		
+		String repo = null;
+		
+		if(tblStock.getSelectedRow() >=0) {
+			int colum = 0;
+			int row = tblStock.getSelectedRow();
+			repo = tblStock.getModel().getValueAt(row, colum).toString();
+		}
+		
+		
+		return repo;
+	}
 	
 }

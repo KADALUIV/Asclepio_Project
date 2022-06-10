@@ -30,7 +30,7 @@ import com.asclepio.model.Producto;
 public class PCompra extends JPanel {
 	
 	public static final int ALTO = 650;
-	public static final int ANCHO = 800;
+	public static final int ANCHO = 950;
 
 	public static final String BTN_COMPRAR = "COMPRAR";
 	public static final String BTN_ELIMINAR = "ELIMINAR";
@@ -56,21 +56,23 @@ public class PCompra extends JPanel {
 	private ArrayList<Producto> datosLista;
 	
 	public PCompra() {
-		setBackground(Color.WHITE);
+		setForeground(new Color(0, 0, 0));
+		setBackground(Color.LIGHT_GRAY);
 		init();
 	}
 
 	private void init() {
 		setLayout(null);
+		setSize(ANCHO,ALTO);
 
 		JLabel lblCarrito = new JLabel("CARRITO");
 		lblCarrito.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCarrito.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblCarrito.setBounds(404, 79, 335, 35);
+		lblCarrito.setBounds(557, 68, 335, 35);
 		add(lblCarrito);
 
 		scrpCarrito = new JScrollPane();
-		scrpCarrito.setBounds(401, 125, 335, 381);
+		scrpCarrito.setBounds(557, 114, 335, 381);
 		add(scrpCarrito);
 
 		tbCarrito = new JTable();
@@ -83,18 +85,18 @@ public class PCompra extends JPanel {
 		// DE ELIMINAR (PONIENDO VISIBLE UNO E INVISIBLE OTRO)
 		btnComprar = new JButton(BTN_COMPRAR);
 		btnComprar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnComprar.setBounds(472, 552, 229, 48);
+		btnComprar.setBounds(642, 556, 229, 48);
 		add(btnComprar);
 
 		btnEliminar = new JButton(BTN_ELIMINAR);
 		btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnEliminar.setBounds(472, 552, 229, 48);
+		btnEliminar.setBounds(642, 556, 229, 48);
 		add(btnEliminar);
 		btnEliminar.setVisible(false);// 
 
 		txtPago = new JTextField();
 		txtPago.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		txtPago.setBounds(632, 506, 104, 35);
+		txtPago.setBounds(788, 496, 104, 35);
 		add(txtPago);
 		txtPago.setColumns(10);
 		txtPago.setEditable(false);
@@ -105,7 +107,7 @@ public class PCompra extends JPanel {
 		add(btnVolver);
 
 		scrpLista = new JScrollPane();
-		scrpLista.setBounds(23, 125, 335, 381);
+		scrpLista.setBounds(88, 114, 335, 381);
 		add(scrpLista);
 
 		list = new JList<Producto>();
@@ -116,33 +118,33 @@ public class PCompra extends JPanel {
 		JLabel lblBusq = new JLabel("B\u00DASQUEDA");
 		lblBusq.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBusq.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblBusq.setBounds(23, 79, 335, 35);
+		lblBusq.setBounds(88, 68, 335, 35);
 		add(lblBusq);
 
 		spinner = new JSpinner();
-		spinner.setBounds(44, 557, 64, 40);
+		spinner.setBounds(46, 561, 64, 40);
 		add(spinner);
 
 		btnCarrito = new JButton(BTN_CARRITO);
 		btnCarrito.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnCarrito.setBounds(148, 553, 114, 48);
+		btnCarrito.setBounds(150, 556, 114, 48);
 		add(btnCarrito);
 		//btnCarrito.setIcon(new ImageIcon(PCompra.class.getResource("/img/carrito.jpg")));
 
 		txtBusq = new JTextField();
 		txtBusq.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		txtBusq.setBounds(256, 33, 287, 35);
+		txtBusq.setBounds(331, 22, 287, 35);
 		add(txtBusq);
 		txtBusq.setColumns(10);
 		txtBusq.setToolTipText("Búsqueda");
 
 		btnBusq = new JButton(BTN_BUSQ);
 		btnBusq.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnBusq.setBounds(587, 11, 60, 60);
+		btnBusq.setBounds(647, 9, 60, 48);
 		add(btnBusq);
 		//btnBusq.setIcon(new ImageIcon(PCompra.class.getResource("/img/lupita.jpg")));
 
-		centrarVentana();
+		//centrarVentana();
 		configurarTabla();
 
 	}
@@ -182,9 +184,10 @@ public class PCompra extends JPanel {
 	}
 	
 	public void showList(ArrayList<Producto> lista) {
+		dlm.removeAllElements();
 		datosLista = lista;
 		list.setModel(dlm);
-		
+	
 		dlm.addAll(lista);
 	}
 

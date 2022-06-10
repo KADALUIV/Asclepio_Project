@@ -2,7 +2,7 @@ package com.asclepio.main;
 
 import java.awt.EventQueue;
 
-import javax.swing.UIManager;
+//import javax.swing.UIManager;
 
 import com.asclepio.control.AppControl;
 import com.asclepio.gui.PStock;

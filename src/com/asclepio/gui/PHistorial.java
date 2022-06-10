@@ -80,7 +80,7 @@ public class PHistorial extends JPanel {
 		btnConsultar.setBounds(710, 95, 35, 34);
 		add(btnConsultar);
 		
-		centrarVentana();
+		//centrarVentana();
 		
 		configurarTabla();
 		

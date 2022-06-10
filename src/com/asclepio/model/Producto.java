@@ -21,8 +21,10 @@ public class Producto {
 
 	@Override
 	public String toString() {
-		return "Medicamento [idProducto=" + idProducto + ", nombre=" + nombre + ", tipo=" + tipo + ", precio=" + precio
-				+ ", stock=" + stock + "]";
+		
+		return nombre + " - " + tipo;
+		/*return "Medicamento [idProducto=" + idProducto + ", nombre=" + nombre + ", tipo=" + tipo + ", precio=" + precio
+				+ ", stock=" + stock + "]";*/
 	}
 
 

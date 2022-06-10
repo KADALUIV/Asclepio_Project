@@ -26,24 +26,21 @@ public class AppControl implements ActionListener {
 	private static ArrayList<Producto> listaProd;
 	VPrincipal vp;
 	VLogin vl;
-	PCompra pC;
+	PCompra pc;
 	private int contAcces;
 	SqlQuery sql;
-<<<<<<< Updated upstream
-	PStock pSto;
-	PHistorial pHist;
-=======
 	PStock ps;
 	PHistorial ph;
->>>>>>> Stashed changes
+	
 
-	public AppControl(VPrincipal vp, VLogin vl, PCompra pC, PStock pSto, PHistorial pHist) {
+
+	public AppControl(VPrincipal vp, VLogin vl, PCompra pC, PStock ps, PHistorial pHist) {
 		this.vp = vp;
 		this.vl = vl;
-		this.pC = pC;
-		this.pSto = pSto;
+		this.pc = pC;
+		this.ps = ps;
 		this.sql = new SqlQuery();
-		this.pHist = pHist;
+		this.ph = pHist;
 		contAcces = 0;
 		listaProd = new ArrayList<Producto>();
 	}
@@ -55,35 +52,21 @@ public class AppControl implements ActionListener {
 				searchProd();
 			} else if (e.getActionCommand().equals(PCompra.BTN_CARRITO)) {
 				addCarrito();
-			} else if (e.getActionCommand().equals(PCompra.BTN_COMPRAR)) {
+			}else if (e.getActionCommand().equals(PCompra.BTN_COMPRAR)) {
 				buyProducts();
 			} else if (e.getActionCommand().equals(PCompra.BTN_ELIMINAR)) {
 				deleteProd();
-<<<<<<< Updated upstream
-			} else if (e.getActionCommand().equals(PStock.BTN_BUSQUEDA)) {
-				listaProd = sql.verStock();
-			} else if (e.getActionCommand().equals(VLogin.BTN_LOGIN) || e.getSource().equals(vl.getTxtPwd())) {
-				obtenerUsuario();
-			} else if (e.getActionCommand().equals(VPrincipal.BTN_SEE_STOCK)) {
-
-			} else if (e.getActionCommand().equals(VPrincipal.BTN_REGISTRAR_C)) {
-
-			} else if (e.getActionCommand().equals(VPrincipal.BTN_HISTORIAL_C)) {
-
-			} else if (e.getActionCommand().equals(PHistorial.BTN_CONSULTAR)) {
-				pHist.consultarProductos();
-=======
 			} else if (e.getActionCommand().equals(PStock.BTN_BUSQUEDA_PSTOCK)) {
-
-				listaProd = sql.verStock();
-
+				String palabra = PStock.obtenerTexto();
+				listaProd = sql.getSearchedProd(palabra);
+				ps.filtrarTabla(listaProd);
 			} else if (e.getActionCommand().equals(PStock.BTN_REPONER_PSTOCK)) {
 				String idStock = ps.productoSeleccionado();
 				int cantidad = ps.cantidadReponer();
 
 				sql.reponerStock(idStock, cantidad);
 
-			} else if (e.getActionCommand().equals(VLogin.BTN_LOGIN) || e.getSource().equals(vl.getTxtPwd())) {
+			}  else if (e.getActionCommand().equals(VLogin.BTN_LOGIN) || e.getSource().equals(vl.getTxtPwd())) {
 				obtenerUsuario();
 			} else if (e.getActionCommand().equals(VPrincipal.BTN_SEE_STOCK)) {
 				System.out.println("Funciona Btn Stock");
@@ -103,7 +86,7 @@ public class AppControl implements ActionListener {
 			} else if (e.getActionCommand().equals(PHistorial.BTN_CONSULTAR)) {
 
 				ph.consultarProductos();
->>>>>>> Stashed changes
+
 			}
 		} else if (e.getSource() instanceof JMenuItem) {
 
@@ -111,8 +94,6 @@ public class AppControl implements ActionListener {
 
 			} else if (e.getActionCommand().equals(VPrincipal.ITEM_MENU_EXIT)) {
 
-<<<<<<< Updated upstream
-=======
 				int option = JOptionPane.showConfirmDialog(vp, "Â¿Estas seguro que deseas salir?", "Confirmar Salida",
 						JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
@@ -120,9 +101,10 @@ public class AppControl implements ActionListener {
 					System.exit(0);
 				}
 
->>>>>>> Stashed changes
 			}
 		}
+
+		
 
 	}
 
@@ -178,7 +160,7 @@ public class AppControl implements ActionListener {
 			ArrayList<Producto> lista = new ArrayList<>();
 			lista = sql.getSearchedProd(busq);
 			if (lista.isEmpty()) {
-				pc.setError("No hay resultados para su búsqueda");
+				pc.setError("No hay resultados para su bï¿½squeda");
 			} else {
 				pc.showList(sql.getSearchedProd(busq));
 
@@ -207,7 +189,7 @@ public class AppControl implements ActionListener {
 			} else {
 				acceso = false;
 				vl.dispose();
-				vp.hacerVisible();
+				vp.showVPrincipal();
 			}
 
 			if (acceso) {

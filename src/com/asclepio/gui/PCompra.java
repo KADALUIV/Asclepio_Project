@@ -35,7 +35,7 @@ public class PCompra extends JPanel {
 	public static final String BTN_COMPRAR = "COMPRAR";
 	public static final String BTN_ELIMINAR = "ELIMINAR";
 	public static final String BTN_VOLVER = "VOLVER";
-	public static final String BTN_BUSQ = "BÚSQUEDA";
+	public static final String BTN_BUSQ = "Bï¿½SQUEDA";
 	public static final String BTN_CARRITO = "CARRITO";
 
 	private JScrollPane scrpCarrito;
@@ -80,8 +80,8 @@ public class PCompra extends JPanel {
 		tbCarrito.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		scrpCarrito.setViewportView(tbCarrito);
 
-		// LOS BOTONES ESTÁN EN LA MISMA POSICIÓN, PARA QUE CUANDO
-		// UN PRODUCTO SEA SELECCIONADO, EL BOTÓN COMPRAR SE CAMBIARÁ AL
+		// LOS BOTONES ESTï¿½N EN LA MISMA POSICIï¿½N, PARA QUE CUANDO
+		// UN PRODUCTO SEA SELECCIONADO, EL BOTï¿½N COMPRAR SE CAMBIARï¿½ AL
 		// DE ELIMINAR (PONIENDO VISIBLE UNO E INVISIBLE OTRO)
 		btnComprar = new JButton(BTN_COMPRAR);
 		btnComprar.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -136,7 +136,7 @@ public class PCompra extends JPanel {
 		txtBusq.setBounds(331, 22, 287, 35);
 		add(txtBusq);
 		txtBusq.setColumns(10);
-		txtBusq.setToolTipText("Búsqueda");
+		txtBusq.setToolTipText("Bï¿½squeda");
 
 		btnBusq = new JButton(BTN_BUSQ);
 		btnBusq.setFont(new Font("Tahoma", Font.PLAIN, 12));

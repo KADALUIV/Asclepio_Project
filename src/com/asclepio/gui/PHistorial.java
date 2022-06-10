@@ -141,7 +141,7 @@ public class PHistorial extends JPanel {
 			sum = sum + precio * cantidad;
 		}
 
-		txtPrecioTotal.setText(Double.toString(sum) + " €");
+		txtPrecioTotal.setText(Double.toString(sum) + " ï¿½");
 		
 		if (listaProductos.isEmpty()) {
 			mostrarComponentesConsulta(false);

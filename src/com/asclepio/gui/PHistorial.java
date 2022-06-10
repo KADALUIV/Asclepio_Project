@@ -3,6 +3,8 @@ package com.asclepio.gui;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -21,6 +23,7 @@ import com.asclepio.db.sql.SqlQuery;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import java.awt.event.KeyAdapter;
 
 public class PHistorial extends JPanel {
 	private static final int ANCHO = 950;
@@ -76,6 +79,7 @@ public class PHistorial extends JPanel {
 		txtPrecioTotal.setColumns(10);
 		
 		btnConsultar = new JButton("");
+		btnConsultar.setToolTipText("Consultar");
 		//btnConsultar.setIcon(new ImageIcon(PHistorial.class.getResource("/img/search.png")));
 		btnConsultar.setBounds(710, 95, 35, 34);
 		add(btnConsultar);
@@ -83,7 +87,7 @@ public class PHistorial extends JPanel {
 		centrarVentana();
 		
 		configurarTabla();
-		
+
 	}
 	
 	private void configurarTabla() {
@@ -117,21 +121,11 @@ public class PHistorial extends JPanel {
 		btnConsultar.addActionListener(c);
 	}
 
-	public void consultarProductos() {
-		
-		String fecha = this.getFecha();
-		
-		SqlQuery productoContract = new SqlQuery();
-		ArrayList<ProductoCompra> productos = productoContract.consultarProductos(fecha);
-		this.rellenarTabla(productos);	
-		
-	}
-
-	private String getFecha() {
+	public String getFecha() {
 		return this.txtFecha.getText().trim();
 	}
 
-	private void rellenarTabla(ArrayList<ProductoCompra> listaProductos) {
+	public void rellenarTabla(ArrayList<ProductoCompra> listaProductos) {
 		dtm.setRowCount(0);
 		
 		double sum = 0;

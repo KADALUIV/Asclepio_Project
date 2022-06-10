@@ -20,6 +20,7 @@ import com.asclepio.gui.VPrincipal;
 import com.asclepio.model.Usuario;
 
 import com.asclepio.model.Producto;
+import com.asclepio.model.ProductoCompra;
 
 public class AppControl implements ActionListener {
 
@@ -27,7 +28,7 @@ public class AppControl implements ActionListener {
 	private static ArrayList<Producto> listaProd;
 	VPrincipal vp;
 	VLogin vl;
-	PCompra pc;
+	PCompra pC;
 	private int contAcces;
 	SqlQuery sql;
 	PStock ps;
@@ -37,7 +38,7 @@ public class AppControl implements ActionListener {
 	public AppControl(VPrincipal vp, VLogin vl, PCompra pC, PStock ps, PHistorial pHist) {
 		this.vp = vp;
 		this.vl = vl;
-		this.pc = pC;
+		this.pC = pC;
 		this.ps = ps;
 		this.sql = new SqlQuery();
 		this.ph = pHist;
@@ -81,18 +82,16 @@ public class AppControl implements ActionListener {
 				
 			}else if (e.getActionCommand().equals(VPrincipal.BTN_REGISTRAR_C)) {
 				System.out.println("Funciona Btn Resgistrar");
-				vp.uploadPanel(pc);
+				vp.uploadPanel(pC);
 				vp.hacerVisible(true);
 				
 			}else if (e.getActionCommand().equals(VPrincipal.BTN_HISTORIAL_C)) {
 				System.out.println("Funciona Btn Hostorial");
 				vp.uploadPanel(ph);
 				vp.hacerVisible(true);
-				
-			}else if (e.getActionCommand().equals(PHistorial.BTN_CONSULTAR)) {
-			
-			
-				ph.consultarProductos();
+
+			}else if (button.getToolTipText().equals(PHistorial.BTN_CONSULTAR)) {
+				this.consultarProductos();
 			}	
 		}else if(e.getSource() instanceof JMenuItem){
 			
@@ -217,5 +216,15 @@ public class AppControl implements ActionListener {
 
 		}
 
+	}
+	
+	public void consultarProductos() {
+		
+		String fecha = ph.getFecha();
+		
+		SqlQuery productoContract = new SqlQuery();
+		ArrayList<ProductoCompra> productos = productoContract.consultarProductos(fecha);
+		ph.rellenarTabla(productos);	
+		
 	}
 }

@@ -76,7 +76,7 @@ public class PHistorial extends JPanel {
 		txtPrecioTotal.setColumns(10);
 		
 		btnConsultar = new JButton("");
-		
+		//btnConsultar.setIcon(new ImageIcon(PHistorial.class.getResource("/img/search.png")));
 		btnConsultar.setBounds(710, 95, 35, 34);
 		add(btnConsultar);
 		

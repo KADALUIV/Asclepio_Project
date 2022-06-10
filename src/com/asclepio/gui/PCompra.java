@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
@@ -11,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -125,7 +127,7 @@ public class PCompra extends JPanel {
 		btnCarrito.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnCarrito.setBounds(148, 553, 114, 48);
 		add(btnCarrito);
-		
+		//btnCarrito.setIcon(new ImageIcon(PCompra.class.getResource("/img/carrito.jpg")));
 
 		txtBusq = new JTextField();
 		txtBusq.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -138,7 +140,7 @@ public class PCompra extends JPanel {
 		btnBusq.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnBusq.setBounds(587, 11, 60, 60);
 		add(btnBusq);
-		
+		//btnBusq.setIcon(new ImageIcon(PCompra.class.getResource("/img/lupita.jpg")));
 
 		centrarVentana();
 		configurarTabla();
@@ -171,6 +173,14 @@ public class PCompra extends JPanel {
 	
 	}
 	
+	public void rellenarTabla(Producto prod, int cant) {
+		Object[] fila = new Object[3];
+		
+		fila[0] = cant;
+		fila[1] = prod.getNomTipo();
+		fila[2] = prod.getPrecio();
+	}
+	
 	public void showList(ArrayList<Producto> lista) {
 		datosLista = lista;
 		list.setModel(dlm);
@@ -194,11 +204,21 @@ public class PCompra extends JPanel {
 		return list;
 	}
 	
-	public String getSelectedRow() {
+	public int getSpn() {
+		return (int) spinner.getValue();
+	}
+	
+	public Date getDate() {
+		long miliseconds = System.currentTimeMillis();
+		Date date = new Date(miliseconds);
+		return date;
+	}
+	
+	public Producto getSelectedProd() {
 		Producto item = list.getSelectedValue();
-		String id = item.getIdProducto();
+		//String id = item.getIdProducto();
 		System.out.println(list.getSelectedValue());
-		return id;
+		return item;
 		
 	}
 
@@ -208,6 +228,22 @@ public class PCompra extends JPanel {
 		btnComprar.addActionListener(control);
 		btnEliminar.addActionListener(control);
 		btnVolver.addActionListener(control);
+		
+	}
+	
+	public void habilitarCompList(boolean a) {
+		spinner.setVisible(a);
+		btnCarrito.setVisible(a);
+	}
+	
+	public void  habilitarCompTb(boolean a, boolean b) {
+		btnComprar.setVisible(a);
+		btnEliminar.setVisible(b);
+		
+	}
+	
+	public void setError(String error) {
+		JOptionPane.showMessageDialog(this, error, "Error en datos", JOptionPane.ERROR_MESSAGE);
 		
 	}
 	

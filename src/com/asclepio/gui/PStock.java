@@ -2,6 +2,7 @@ package com.asclepio.gui;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -12,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import com.asclepio.control.AppControl;
+import com.asclepio.model.Producto;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -24,8 +26,7 @@ public class PStock extends JPanel{
 	
 	static final int ALTO = 600;
 	static final int ANCHO = 950;
-	public static final String BTN_VOLVER_PSTOCK = "Volver";
-	public static final String BTN_SALIR_PSTOCK = "Salir";
+	
 	public static final String BTN_BUSQUEDA_PSTOCK = "Busqueda";
 	public static final String BTN_REPONER_PSTOCK = "Reponer";
 	
@@ -40,7 +41,6 @@ public class PStock extends JPanel{
 	private static JTextField txtBusqueda;
 	private JTable tblStock;
 	private JScrollPane scrollPane;
-	private JButton btnsSalir;
 	private JButton btnVolver;
 	private JButton btnBuscar;
 	private JSpinner spnCantidad;
@@ -62,7 +62,7 @@ public class PStock extends JPanel{
 		
 		txtBusqueda = new JTextField();
 		txtBusqueda.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		txtBusqueda.setBounds(226, 109, 459, 35);
+		txtBusqueda.setBounds(245, 109, 459, 35);
 		add(txtBusqueda);
 		txtBusqueda.setColumns(10);
 		
@@ -78,26 +78,21 @@ public class PStock extends JPanel{
 		tblStock = new JTable();
 		scrollPane.setViewportView(tblStock);
 		
-		btnsSalir = new JButton(BTN_SALIR_PSTOCK);
-		btnsSalir.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnsSalir.setBounds(855, 10, 85, 21);
-		add(btnsSalir);
-		
-		btnVolver = new JButton(BTN_VOLVER_PSTOCK);
-		btnVolver.setBounds(10, 11, 85, 21);
-		add(btnVolver);
 		
 		btnBuscar = new JButton(BTN_BUSQUEDA_PSTOCK);
-		btnBuscar.setBounds(432, 154, 85, 21);
+		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnBuscar.setBounds(428, 154, 93, 21);
 		add(btnBuscar);
 		
 		spnCantidad = new JSpinner();
+		spnCantidad.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		spnCantidad.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		spnCantidad.setBounds(856, 540, 54, 21);
 		add(spnCantidad);
 		
 		btnReponer = new JButton(BTN_REPONER_PSTOCK);
-		btnReponer.setBounds(749, 540, 85, 21);
+		btnReponer.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnReponer.setBounds(735, 540, 99, 21);
 		add(btnReponer);
 	
 		
@@ -121,7 +116,6 @@ public class PStock extends JPanel{
 			tModel.addColumn(STOCK); 
 
 
-
 			tblStock.getColumn(ID_PRODUCTO).setPreferredWidth(75);
 			tblStock.getColumn(NOMBRE).setPreferredWidth(75);
 			tblStock.getColumn(TIPO).setPreferredWidth(75);
@@ -129,6 +123,26 @@ public class PStock extends JPanel{
 			tblStock.getColumn(STOCK).setPreferredWidth(75);
 
 
+	}
+	
+	public void filtrarTabla(ArrayList<Producto> listaProd) {
+		
+		tModel.getDataVector().clear();
+		
+		Object[] row  = new Object[5];
+		
+		for (Producto pro : listaProd) {
+			row [0] = pro.getIdProducto();
+			row [1] = pro.getNombre();
+			row [2] = pro.getTipo();
+			row [3] = pro.getPrecio() +  "€";
+			row [4] = pro.getStock();
+			
+			tModel.addRow(row);
+			
+			
+		}
+		
 	}
 
 	public void hacerVisible(boolean b) {
@@ -138,8 +152,6 @@ public class PStock extends JPanel{
 	
 	public void setControlador(AppControl control) {
 		btnBuscar.addActionListener(control);
-		btnVolver.addActionListener(control);
-		btnsSalir.addActionListener(control);
 		btnReponer.addActionListener(control);
 		
 	}
@@ -180,6 +192,11 @@ public class PStock extends JPanel{
 		JOptionPane.showMessageDialog(this, error,
 				"Error de datos", JOptionPane.ERROR_MESSAGE);
 		
+	}
+	
+	public void reponerVisible() {
+		btnReponer.setVisible(productoSeleccionado() != null);
+		spnCantidad.setVisible(productoSeleccionado() != null);
 	}
 	
 }

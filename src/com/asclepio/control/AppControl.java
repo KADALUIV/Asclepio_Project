@@ -70,18 +70,18 @@ public class AppControl implements ActionListener {
 				
 				
 			}else if (e.getActionCommand().equals(VPrincipal.BTN_SEE_STOCK)) {
-				System.out.println("Funciona Btn Stock");
+				
 				vp.uploadPanel(ps);
 				vp.hacerVisible(true);
 				
 				
 			}else if (e.getActionCommand().equals(VPrincipal.BTN_REGISTRAR_C)) {
-				System.out.println("Funciona Btn Resgistrar");
+				
 				vp.uploadPanel(pc);
 				vp.hacerVisible(true);
 				
 			}else if (e.getActionCommand().equals(VPrincipal.BTN_HISTORIAL_C)) {
-				System.out.println("Funciona Btn Hostorial");
+			
 				vp.uploadPanel(ph);
 				vp.hacerVisible(true);
 				

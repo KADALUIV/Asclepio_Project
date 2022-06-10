@@ -313,7 +313,44 @@ public class SqlQuery {
 	}
 
 	public void reponerStock(String idStock, int cantidad) {
-		// TODO Auto-generated method stub
+		
+		// UPDATE PRODUCTO SET STOCK = STOCK + cantidad WHERE ID_PRODUCTO = idStock
+		
+		String query = "UPDATE " + ProductContract.NOMBRE_TABLA + " SET " + ProductContract.COLUMN_STOCK 
+				+ " = " + cantidad + " WHERE " + ProductContract.COLUMN_IDPRODUCTO + " = ?";
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rlst = null;
+		
+		
+		try {
+			con = acceso.getConnection();
+			
+			pstmt = con.prepareStatement(query);
+
+			pstmt.setString(1, idStock);
+			
+			rlst = pstmt.executeQuery();
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(con != null) con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+		
 		
 	}
 }

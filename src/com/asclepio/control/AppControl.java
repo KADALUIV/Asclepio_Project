@@ -29,8 +29,13 @@ public class AppControl implements ActionListener {
 	PCompra pC;
 	private int contAcces;
 	SqlQuery sql;
+<<<<<<< Updated upstream
 	PStock pSto;
 	PHistorial pHist;
+=======
+	PStock ps;
+	PHistorial ph;
+>>>>>>> Stashed changes
 
 	public AppControl(VPrincipal vp, VLogin vl, PCompra pC, PStock pSto, PHistorial pHist) {
 		this.vp = vp;
@@ -54,6 +59,7 @@ public class AppControl implements ActionListener {
 				buyProducts();
 			} else if (e.getActionCommand().equals(PCompra.BTN_ELIMINAR)) {
 				deleteProd();
+<<<<<<< Updated upstream
 			} else if (e.getActionCommand().equals(PStock.BTN_BUSQUEDA)) {
 				listaProd = sql.verStock();
 			} else if (e.getActionCommand().equals(VLogin.BTN_LOGIN) || e.getSource().equals(vl.getTxtPwd())) {
@@ -66,6 +72,38 @@ public class AppControl implements ActionListener {
 
 			} else if (e.getActionCommand().equals(PHistorial.BTN_CONSULTAR)) {
 				pHist.consultarProductos();
+=======
+			} else if (e.getActionCommand().equals(PStock.BTN_BUSQUEDA_PSTOCK)) {
+
+				listaProd = sql.verStock();
+
+			} else if (e.getActionCommand().equals(PStock.BTN_REPONER_PSTOCK)) {
+				String idStock = ps.productoSeleccionado();
+				int cantidad = ps.cantidadReponer();
+
+				sql.reponerStock(idStock, cantidad);
+
+			} else if (e.getActionCommand().equals(VLogin.BTN_LOGIN) || e.getSource().equals(vl.getTxtPwd())) {
+				obtenerUsuario();
+			} else if (e.getActionCommand().equals(VPrincipal.BTN_SEE_STOCK)) {
+				System.out.println("Funciona Btn Stock");
+				vp.uploadPanel(ps);
+				vp.hacerVisible(true);
+
+			} else if (e.getActionCommand().equals(VPrincipal.BTN_REGISTRAR_C)) {
+				System.out.println("Funciona Btn Resgistrar");
+				vp.uploadPanel(pc);
+				vp.hacerVisible(true);
+
+			} else if (e.getActionCommand().equals(VPrincipal.BTN_HISTORIAL_C)) {
+				System.out.println("Funciona Btn Hostorial");
+				vp.uploadPanel(ph);
+				vp.hacerVisible(true);
+
+			} else if (e.getActionCommand().equals(PHistorial.BTN_CONSULTAR)) {
+
+				ph.consultarProductos();
+>>>>>>> Stashed changes
 			}
 		} else if (e.getSource() instanceof JMenuItem) {
 
@@ -73,6 +111,16 @@ public class AppControl implements ActionListener {
 
 			} else if (e.getActionCommand().equals(VPrincipal.ITEM_MENU_EXIT)) {
 
+<<<<<<< Updated upstream
+=======
+				int option = JOptionPane.showConfirmDialog(vp, "Â¿Estas seguro que deseas salir?", "Confirmar Salida",
+						JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+				if (option == JOptionPane.YES_OPTION) {
+					System.exit(0);
+				}
+
+>>>>>>> Stashed changes
 			}
 		}
 
@@ -80,42 +128,41 @@ public class AppControl implements ActionListener {
 
 	private void deleteProd() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	private void buyProducts() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	private void addCarrito() {
-		if (pC.getList().getSelectedIndex() == -1) {
-			JOptionPane.showMessageDialog(pC, "Debe seleccionar el elemento a aï¿½adir", "Error de selecciï¿½n",
+		if (pc.getList().getSelectedIndex() == -1) {
+			JOptionPane.showMessageDialog(pc, "Debe seleccionar el elemento a aï¿½adir", "Error de selecciï¿½n",
 					JOptionPane.ERROR_MESSAGE);
 		} else {
-			
-			pC.habilitarCompList(true);
 
-			Producto prod = pC.getSelectedProd();
+			pc.habilitarCompList(true);
 
-			int cant = pC.getSpn();
-			//String error = "";
-			
-			if(cant <= 0 && cant > prod.getStock()) {
-				pC.setError("La cantidad debe ser mayor que 0 y menor que la de Stock");
-			}else {
+			Producto prod = pc.getSelectedProd();
+
+			int cant = pc.getSpn();
+			System.out.println(cant);
+			// String error = "";
+
+			if (cant <= 0 && cant > prod.getStock()) {
+				pc.setError("La cantidad debe ser mayor que 0 y menor que la de Stock");
+			} else {
 				int result = sql.updateStock(cant, prod.getIdProducto());
-				
-				if(result < 0 ) {
-					pC.setError("Error en la base de datos");
-				}else {
-					pC.rellenarTabla(prod, cant);
+
+				if (result < 0) {
+					pc.setError("Error en la base de datos");
+				} else {
+					pc.rellenarTabla(prod, cant);
 				}
-				
-				
+
 			}
 
-			
 		}
 
 	}
@@ -124,11 +171,18 @@ public class AppControl implements ActionListener {
 
 		// pC.showList(p.getProducts());
 
-		if (pC.getTxtBusq().isEmpty()) {
-			pC.showList(sql.getProducts());
+		if (pc.getTxtBusq().isEmpty()) {
+			pc.showList(sql.getProducts());
 		} else {
-			String busq = pC.getTxtBusq();
-			pC.showList(sql.getSearchedProd(busq));
+			String busq = pc.getTxtBusq();
+			ArrayList<Producto> lista = new ArrayList<>();
+			lista = sql.getSearchedProd(busq);
+			if (lista.isEmpty()) {
+				pc.setError("No hay resultados para su búsqueda");
+			} else {
+				pc.showList(sql.getSearchedProd(busq));
+
+			}
 
 		}
 

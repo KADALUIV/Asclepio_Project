@@ -24,8 +24,7 @@ public class PStock extends JPanel{
 	
 	static final int ALTO = 600;
 	static final int ANCHO = 950;
-	public static final String BTN_VOLVER_PSTOCK = "Volver";
-	public static final String BTN_SALIR_PSTOCK = "Salir";
+	
 	public static final String BTN_BUSQUEDA_PSTOCK = "Busqueda";
 	public static final String BTN_REPONER_PSTOCK = "Reponer";
 	
@@ -78,14 +77,6 @@ public class PStock extends JPanel{
 		tblStock = new JTable();
 		scrollPane.setViewportView(tblStock);
 		
-		btnsSalir = new JButton(BTN_SALIR_PSTOCK);
-		btnsSalir.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnsSalir.setBounds(855, 10, 85, 21);
-		add(btnsSalir);
-		
-		btnVolver = new JButton(BTN_VOLVER_PSTOCK);
-		btnVolver.setBounds(10, 11, 85, 21);
-		add(btnVolver);
 		
 		btnBuscar = new JButton(BTN_BUSQUEDA_PSTOCK);
 		btnBuscar.setBounds(432, 154, 85, 21);
@@ -138,8 +129,6 @@ public class PStock extends JPanel{
 	
 	public void setControlador(AppControl control) {
 		btnBuscar.addActionListener(control);
-		btnVolver.addActionListener(control);
-		btnsSalir.addActionListener(control);
 		btnReponer.addActionListener(control);
 		
 	}

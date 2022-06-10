@@ -34,11 +34,11 @@ public class AppControl implements ActionListener {
 	PHistorial ph;
 	
 
-	public AppControl(VPrincipal vp, VLogin vl, PCompra pC, PStock pSto, PHistorial pHist) {
+	public AppControl(VPrincipal vp, VLogin vl, PCompra pC, PStock ps, PHistorial pHist) {
 		this.vp = vp;
 		this.vl = vl;
 		this.pc = pC;
-		this.ps = pSto;
+		this.ps = ps;
 		this.sql = new SqlQuery();
 		this.ph = pHist;
 		contAcces = 0;
@@ -55,12 +55,13 @@ public class AppControl implements ActionListener {
 			}else if(e.getActionCommand().equals(PCompra.BTN_CARRITO)) {
 				addCarrito();
 			}else if(e.getActionCommand().equals(PStock.BTN_BUSQUEDA_PSTOCK)) {
-				
-				listaProd = sql.verStock();
+				String palabra = PStock.obtenerTexto();
+				listaProd = sql.verStock(palabra);
+				ps.filtrarTabla(listaProd);
 				
 			}else if(e.getActionCommand().equals(PStock.BTN_REPONER_PSTOCK)) {
-				String idStock = pSto.productoSeleccionado();
-				int cantidad = pSto.cantidadReponer();
+				String idStock = ps.productoSeleccionado();
+				int cantidad = ps.cantidadReponer();
 				
 				sql.reponerStock(idStock, cantidad);
 				

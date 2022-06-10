@@ -2,6 +2,7 @@ package com.asclepio.gui;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -12,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import com.asclepio.control.AppControl;
+import com.asclepio.model.Producto;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -121,6 +123,26 @@ public class PStock extends JPanel{
 			tblStock.getColumn(STOCK).setPreferredWidth(75);
 
 
+	}
+	
+	public void filtrarTabla(ArrayList<Producto> listaProd) {
+		
+		tModel.getDataVector().clear();
+		
+		Object[] row  = new Object[5];
+		
+		for (Producto pro : listaProd) {
+			row [0] = pro.getIdProducto();
+			row [1] = pro.getNombre();
+			row [2] = pro.getTipo();
+			row [3] = pro.getPrecio() +  "€";
+			row [4] = pro.getStock();
+			
+			tModel.addRow(row);
+			
+			
+		}
+		
 	}
 
 	public void hacerVisible(boolean b) {

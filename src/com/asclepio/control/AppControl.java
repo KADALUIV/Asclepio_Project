@@ -54,9 +54,14 @@ public class AppControl implements ActionListener {
 				searchProd();
 			}else if(e.getActionCommand().equals(PCompra.BTN_CARRITO)) {
 				addCarrito();
-			}else if(e.getActionCommand().equals(PStock.BTN_BUSQUEDA)) {
-			
-			listaProd = sql.verStock();
+			}else if(e.getActionCommand().equals(PStock.BTN_BUSQUEDA_PSTOCK)) {
+				
+				listaProd = sql.verStock();
+				
+			}else if(e.getActionCommand().equals(PStock.BTN_REPONER_PSTOCK)) {
+				
+				
+				
 			}else if (e.getActionCommand().equals(VLogin.BTN_LOGIN) || e.getSource().equals(vl.getTxtPwd())) {
 				obtenerUsuario();
 			}else if (e.getActionCommand().equals(VPrincipal.BTN_SEE_STOCK)) {

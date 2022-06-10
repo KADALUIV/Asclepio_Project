@@ -5,6 +5,8 @@ import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -16,6 +18,7 @@ import javax.swing.JTable;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 public class PStock extends JPanel{
 	
@@ -89,6 +92,7 @@ public class PStock extends JPanel{
 		add(btnBuscar);
 		
 		spnCantidad = new JSpinner();
+		spnCantidad.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		spnCantidad.setBounds(856, 540, 54, 21);
 		add(spnCantidad);
 		
@@ -159,6 +163,23 @@ public class PStock extends JPanel{
 		
 		
 		return repo;
+	}
+	
+	public int cantidadReponer() {
+		
+		int cantRe = (int) spnCantidad.getValue();
+		
+		if(cantRe == 0) {
+			mostrarError("La cantidad a reponer debe ser superior a 0");
+		}
+		
+		return cantRe;
+	}
+	
+	public void mostrarError(String error) {
+		JOptionPane.showMessageDialog(this, error,
+				"Error de datos", JOptionPane.ERROR_MESSAGE);
+		
 	}
 	
 }

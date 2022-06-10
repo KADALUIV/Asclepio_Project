@@ -16,6 +16,7 @@ import com.asclepio.model.Usuario;
 
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
 
 public class VLogin extends JFrame {
 	public static final String BTN_LOGIN = "Login";
@@ -35,9 +36,10 @@ public class VLogin extends JFrame {
 		getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("ASCLEPIO");
-		lblNewLabel.setForeground(Color.GREEN);
-		lblNewLabel.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		lblNewLabel.setBounds(177, 19, 103, 25);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setForeground(Color.BLACK);
+		lblNewLabel.setFont(new Font("Lucida Grande", Font.BOLD, 38));
+		lblNewLabel.setBounds(81, 19, 267, 37);
 		getContentPane().add(lblNewLabel);
 		
 		txtUsuario = new JTextField();

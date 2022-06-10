@@ -76,7 +76,7 @@ public class PHistorial extends JPanel {
 		txtPrecioTotal.setColumns(10);
 		
 		btnConsultar = new JButton("");
-		btnConsultar.setIcon(new ImageIcon(PHistorial.class.getResource("/img/search.png")));
+		
 		btnConsultar.setBounds(710, 95, 35, 34);
 		add(btnConsultar);
 		
@@ -141,7 +141,7 @@ public class PHistorial extends JPanel {
 			sum = sum + precio * cantidad;
 		}
 
-		txtPrecioTotal.setText(Double.toString(sum) + " €");
+		txtPrecioTotal.setText(Double.toString(sum) + " ï¿½");
 		
 		if (listaProductos.isEmpty()) {
 			mostrarComponentesConsulta(false);

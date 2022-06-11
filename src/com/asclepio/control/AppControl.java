@@ -48,7 +48,9 @@ public class AppControl implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() instanceof JButton || e.getSource() instanceof JTextField) {
+		if(e.getSource() instanceof JButton) {
+			JButton button = (JButton)e.getSource();
+			
 			if(e.getActionCommand().equals(PCompra.BTN_BUSQ)) {
 				searchProd();
 			} else if (e.getActionCommand().equals(PCompra.BTN_CARRITO)) {
@@ -66,10 +68,9 @@ public class AppControl implements ActionListener {
 			}else if(e.getActionCommand().equals(PStock.BTN_REPONER_PSTOCK)) {
 				String idStock = ps.productoSeleccionado();
 				int cantidad = ps.cantidadReponer();
-				
 				sql.reponerStock(idStock, cantidad);
 				
-			}else if (e.getActionCommand().equals(VLogin.BTN_LOGIN) || e.getSource().equals(vl.getTxtPwd())) {
+			}else if (e.getActionCommand().equals(VLogin.BTN_LOGIN)) {
 		
 				obtenerUsuario();
 				
@@ -92,7 +93,16 @@ public class AppControl implements ActionListener {
 
 			}else if (button.getToolTipText().equals(PHistorial.BTN_CONSULTAR)) {
 				this.consultarProductos();
-			}	
+			}
+			
+		}else if(e.getSource() instanceof JTextField){
+			if (e.getSource().equals(vl.getTxtPwd())) {
+				obtenerUsuario();
+				
+			} else if(e.getSource().equals(ph.getTxtFecha())) {
+				consultarProductos();
+			}
+			
 		}else if(e.getSource() instanceof JMenuItem){
 			
 			if (e.getActionCommand().equals(VPrincipal.ITEM_MENU_LOGOUT)) {

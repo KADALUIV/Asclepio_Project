@@ -1,16 +1,17 @@
 package com.asclepio.db.sql;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import com.asclepio.model.ProductoCompra;
-
+import com.asclepio.model.Usuario;
 import com.asclepio.db.AccesoDB;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
-import com.asclepio.gui.PStock;
 import com.asclepio.model.Producto;
 
 public class SqlQuery {
@@ -179,8 +180,6 @@ public class SqlQuery {
 		return listaProductos;
 	}
 
-	
-
 	public ArrayList<ProductoCompra> consultarProductos(String fecha) {
 		ArrayList<ProductoCompra> productos = new ArrayList<ProductoCompra>();
 
@@ -193,13 +192,13 @@ public class SqlQuery {
 			con = this.acceso.getConnection();
 
 			if (fecha == null || fecha.equals("")) {
-				query = "SELECT (P.NOMBRE || ' (' || P.ID_PRODUCTO || ')') AS NOMBRE, P.PRECIO, SUM(C.CANTIDAD) AS CANTIDAD_TOTAL"
+				query = "SELECT (P.NOMBRE || ' (' || P.ID_PRODUCTO || ')') AS ID_PRODUCTO, NOMBRE, P.TIPO, STOCK  P.PRECIO, SUM(C.CANTIDAD) AS CANTIDAD_TOTAL"
 						+ " FROM PRODUCTO P, COMPRA C" + " WHERE P.ID_PRODUCTO = C.ID_STOCK"
 						+ " GROUP BY P.ID_PRODUCTO, P.PRECIO";
 
 				pstmt = con.prepareStatement(query);
 			} else {
-				query = "SELECT (P.NOMBRE || ' (' || P.ID_PRODUCTO || ')') AS NOMBRE, P.PRECIO, SUM(C.CANTIDAD) AS CANTIDAD_TOTAL"
+				query = "SELECT (P.NOMBRE || ' (' || P.ID_PRODUCTO || ')') AS ID_PRODUCTO, NOMBRE, P.TIPO, STOCK, P.PRECIO, SUM(C.CANTIDAD) AS CANTIDAD_TOTAL"
 						+ " FROM PRODUCTO P, COMPRA C" + " WHERE P.ID_PRODUCTO = C.ID_STOCK" + " AND FECHA_COMPRA = ?"
 						+ " GROUP BY P.ID_PRODUCTO, P.PRECIO";
 
@@ -210,11 +209,16 @@ public class SqlQuery {
 			rslt = pstmt.executeQuery();
 
 			while (rslt.next()) {
+				String id = rslt.getString(ProductContract.COLUMN_IDPRODUCTO);
 				String nombre = rslt.getString("NOMBRE");
+				String tipo = rslt.getString("TIPO");
 				double precio = rslt.getDouble("PRECIO");
+				int stock = rslt.getInt("STOCK");
 				int cantidad = rslt.getInt("CANTIDAD_TOTAL");
 
-				ProductoCompra producto = new ProductoCompra(nombre, precio, cantidad);
+				 
+				Producto p = new Producto(id, nombre, tipo, precio, stock);
+				ProductoCompra producto = new ProductoCompra(p, cantidad);
 				productos.add(producto);
 			}
 
@@ -239,7 +243,7 @@ public class SqlQuery {
 
 	}
 
-	public int updateStock(int cant, String id) {
+	public int updateStockRest(int cant, String id) {
 		int result = 0;
 		String query = "UPDATE " + ProductContract.NOMBRE_TABLA + " SET " + ProductContract.COLUMN_STOCK + " =  "
 				+ ProductContract.COLUMN_STOCK + " - ? " + " WHERE " + ProductContract.COLUMN_IDPRODUCTO + " = ?; ";
@@ -252,6 +256,8 @@ public class SqlQuery {
 			pstmt = con.prepareStatement(query);
 
 			pstmt.setInt(1, cant);
+			pstmt.setString(2, id);
+
 			result = pstmt.executeUpdate();
 
 		} catch (ClassNotFoundException e) {
@@ -275,30 +281,29 @@ public class SqlQuery {
 			}
 
 		}
-		
+
 		return result;
 
 	}
 
 	public void reponerStock(String idStock, int cantidad) {
-		
+
 		// UPDATE PRODUCTO SET STOCK = STOCK + cantidad WHERE ID_PRODUCTO = idStock
-		
-		String query = "UPDATE " + ProductContract.NOMBRE_TABLA + " SET " + ProductContract.COLUMN_STOCK 
-				+ " = " + cantidad + " WHERE " + ProductContract.COLUMN_IDPRODUCTO + " = ?";
-		
+
+		String query = "UPDATE " + ProductContract.NOMBRE_TABLA + " SET " + ProductContract.COLUMN_STOCK + " = "
+				+ cantidad + " WHERE " + ProductContract.COLUMN_IDPRODUCTO + " = ?";
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rlst = null;
-		
-		
+
 		try {
 			con = acceso.getConnection();
-			
+
 			pstmt = con.prepareStatement(query);
 
 			pstmt.setString(1, idStock);
-			
+
 			rlst = pstmt.executeQuery();
 
 		} catch (ClassNotFoundException e) {
@@ -307,18 +312,120 @@ public class SqlQuery {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
-				if(pstmt != null) pstmt.close();
-				if(con != null) con.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+
+	}
+
+	public int updateStockSum(String nom, String tipo, int cant) {
+		int resultado = 0;
 		
+		String query = "UPDATE " + ProductContract.NOMBRE_TABLA + " SET " + ProductContract.COLUMN_STOCK + " = "
+				+ ProductContract.COLUMN_STOCK + " + ? " + " WHERE UPPER( " + ProductContract.COLUMN_NOM  + " ) LIKE ? AND UPPER("
+				+ ProductContract.COLUMN_TIPO + ") LIKE ?;";
 		
+		Connection con = null;
+		PreparedStatement pstmt = null;
 		
+		try {
+			
+			con = acceso.getConnection();
+			
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, "%" + nom.toUpperCase() + "%");
+			pstmt.setString(2, "%" + tipo.toUpperCase() + "%");
+			pstmt.setInt(3, cant);
+
+			resultado = pstmt.executeUpdate();
+			
+		}catch (ClassNotFoundException e) {
+			System.out.println("El driver indicado no es correcto");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("Error en la base de datos: sentencia incorrecta");
+			e.printStackTrace();
+		} finally {
+
+			try {
+
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+
+		}
+				
 		
+		return resultado;
+	}
+
+	public void insertTabla(List<ProductoCompra> compra, Usuario usuario, String fechaCompra) {
+		int[] result;
+
+		String query = "INSERT INTO " + CompraContract.NOMBRE_TABLA + "( " + CompraContract.COLUMN_IDCOMPRA + ", "
+				+ CompraContract.COLUMN_FEC + ", " + CompraContract.COLUMN_IMP + ", " + CompraContract.COLUMN_IDUSER
+				+ ", " + CompraContract.COLUMN_IDSTOCK + ", " + CompraContract.COLUMN_CANT + ")"
+				+ " VALUES (?, ?, ?, ?, ?, ?);";
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			con = acceso.getConnection();
+			pstmt = con.prepareStatement(query);
+			
+			int j = 1;
+			
+				for (ProductoCompra p : compra) {
+						pstmt.setInt(1, j);
+						pstmt.setString(2, fechaCompra);
+						pstmt.setDouble(3, p.getProducto().getPrecio());
+						pstmt.setInt(4, usuario.getIdUsuario());
+						pstmt.setString(5, p.getProducto().getIdProducto());
+						pstmt.setInt(6, p.getCantidad());
+
+						pstmt.addBatch();
+						j++;
+				}
+			
+			
+
+			result = pstmt.executeBatch();
+
+			for (int i = 0; i < result.length; i++) {
+				if (result[i] == Statement.SUCCESS_NO_INFO) {
+					System.out.println("Execution " + i + ": unknown number of rows updated");
+				} else {
+					System.out.println("Execution " + i + "successful: " + result[i] + " rows updated");
+				}
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 }

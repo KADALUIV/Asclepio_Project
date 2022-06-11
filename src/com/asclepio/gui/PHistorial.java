@@ -85,7 +85,7 @@ public class PHistorial extends JPanel {
 		btnConsultar.setBounds(710, 95, 35, 34);
 		add(btnConsultar);
 		
-		centrarVentana();
+		//centrarVentana();
 		
 		configurarTabla();
 
@@ -133,7 +133,7 @@ public class PHistorial extends JPanel {
 		
 		double sum = 0;
 		for (ProductoCompra productoCompra : listaProductos) {
-			double precio = productoCompra.getPrecio();
+			double precio = productoCompra.getProducto().getPrecio();
 			int cantidad = productoCompra.getCantidad();
 			sum = sum + precio * cantidad;
 		}
@@ -150,8 +150,8 @@ public class PHistorial extends JPanel {
 			Object[] fila = new Object[3];
 			
 			for (ProductoCompra p : listaProductos) {
-				fila[0] = p.getNombre();
-				fila[1] = p.getPrecio();
+				fila[0] = p.getProducto().getNombre() + "-" + p.getProducto().getTipo();
+				fila[1] = p.getProducto().getPrecio();
 				fila[2] = p.getCantidad();
 				
 				dtm.addRow(fila);

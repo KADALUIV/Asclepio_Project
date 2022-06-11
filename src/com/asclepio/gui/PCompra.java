@@ -4,8 +4,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.MouseListener;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -24,13 +26,15 @@ import javax.swing.table.DefaultTableModel;
 
 import com.asclepio.control.AppControl;
 import com.asclepio.model.Producto;
+import com.asclepio.model.ProductoCompra;
+import javax.swing.SpinnerNumberModel;
 
 //import asclepio.view.PCompra;
 
 public class PCompra extends JPanel {
-	
+
 	public static final int ALTO = 650;
-	public static final int ANCHO = 800;
+	public static final int ANCHO = 950;
 
 	public static final String BTN_COMPRAR = "COMPRAR";
 	public static final String BTN_ELIMINAR = "ELIMINAR";
@@ -44,7 +48,6 @@ public class PCompra extends JPanel {
 	private JButton btnComprar;
 	private JButton btnEliminar;
 	private JTextField txtPago;
-	private JButton btnVolver;
 	private JTextField txtBusq;
 	private JList<Producto> list;
 	private DefaultListModel<Producto> dlm;
@@ -52,25 +55,28 @@ public class PCompra extends JPanel {
 	private JButton btnCarrito;
 	private JSpinner spinner;
 	private JScrollPane scrpLista;
-	
-	private ArrayList<Producto> datosLista;
-	
+
+	private List<ProductoCompra> carrito;
+
 	public PCompra() {
+		this.carrito = new ArrayList<ProductoCompra>();
+		setForeground(new Color(0, 0, 0));
 		setBackground(Color.WHITE);
 		init();
 	}
 
 	private void init() {
 		setLayout(null);
+		setSize(ANCHO, ALTO);
 
 		JLabel lblCarrito = new JLabel("CARRITO");
 		lblCarrito.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCarrito.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblCarrito.setBounds(404, 79, 335, 35);
+		lblCarrito.setBounds(557, 68, 335, 35);
 		add(lblCarrito);
 
 		scrpCarrito = new JScrollPane();
-		scrpCarrito.setBounds(401, 125, 335, 381);
+		scrpCarrito.setBounds(557, 114, 335, 381);
 		add(scrpCarrito);
 
 		tbCarrito = new JTable();
@@ -83,29 +89,23 @@ public class PCompra extends JPanel {
 		// DE ELIMINAR (PONIENDO VISIBLE UNO E INVISIBLE OTRO)
 		btnComprar = new JButton(BTN_COMPRAR);
 		btnComprar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnComprar.setBounds(472, 552, 229, 48);
+		btnComprar.setBounds(460, 556, 229, 48);
 		add(btnComprar);
 
 		btnEliminar = new JButton(BTN_ELIMINAR);
 		btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnEliminar.setBounds(472, 552, 229, 48);
+		btnEliminar.setBounds(699, 556, 229, 48);
 		add(btnEliminar);
-		btnEliminar.setVisible(false);// 
 
 		txtPago = new JTextField();
 		txtPago.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		txtPago.setBounds(632, 506, 104, 35);
+		txtPago.setBounds(788, 496, 104, 35);
 		add(txtPago);
 		txtPago.setColumns(10);
 		txtPago.setEditable(false);
 
-		btnVolver = new JButton(BTN_VOLVER);
-		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnVolver.setBounds(10, 11, 85, 21);
-		add(btnVolver);
-
 		scrpLista = new JScrollPane();
-		scrpLista.setBounds(23, 125, 335, 381);
+		scrpLista.setBounds(88, 114, 335, 381);
 		add(scrpLista);
 
 		list = new JList<Producto>();
@@ -116,38 +116,38 @@ public class PCompra extends JPanel {
 		JLabel lblBusq = new JLabel("B\u00DASQUEDA");
 		lblBusq.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBusq.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblBusq.setBounds(23, 79, 335, 35);
+		lblBusq.setBounds(88, 68, 335, 35);
 		add(lblBusq);
 
 		spinner = new JSpinner();
-		spinner.setBounds(44, 557, 64, 40);
+		spinner.setModel(new SpinnerNumberModel(1, 1, 100, 1));
+		spinner.setBounds(140, 562, 64, 40);
 		add(spinner);
 
 		btnCarrito = new JButton(BTN_CARRITO);
 		btnCarrito.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnCarrito.setBounds(148, 553, 114, 48);
+		btnCarrito.setBounds(263, 556, 114, 48);
 		add(btnCarrito);
-		//btnCarrito.setIcon(new ImageIcon(PCompra.class.getResource("/img/carrito.jpg")));
+		// btnCarrito.setIcon(new
+		// ImageIcon(PCompra.class.getResource("/img/carrito.jpg")));
 
 		txtBusq = new JTextField();
 		txtBusq.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		txtBusq.setBounds(256, 33, 287, 35);
+		txtBusq.setBounds(331, 22, 287, 35);
 		add(txtBusq);
 		txtBusq.setColumns(10);
 		txtBusq.setToolTipText("B�squeda");
 
 		btnBusq = new JButton(BTN_BUSQ);
 		btnBusq.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnBusq.setBounds(587, 11, 60, 60);
+		btnBusq.setBounds(647, 9, 60, 48);
 		add(btnBusq);
-		//btnBusq.setIcon(new ImageIcon(PCompra.class.getResource("/img/lupita.jpg")));
+		// btnBusq.setIcon(new ImageIcon(PCompra.class.getResource("/img/lupita.jpg")));
 
-		centrarVentana();
+		// centrarVentana();
 		configurarTabla();
 
 	}
-	
-
 
 	public String getTxtBusq() {
 		return txtBusq.getText();
@@ -169,22 +169,31 @@ public class PCompra extends JPanel {
 		tbCarrito.getColumn("CANTIDAD").setPreferredWidth(50);
 		tbCarrito.getColumn("PRODUCTO").setPreferredWidth(150);
 		tbCarrito.getColumn("PRECIO").setPreferredWidth(50);
-		
-	
+
 	}
-	
+
 	public void rellenarTabla(Producto prod, int cant) {
+
 		Object[] fila = new Object[3];
-		
+		ProductoCompra p;
+
 		fila[0] = cant;
-		fila[1] = prod.getNomTipo();
+		fila[1] = prod.getNombre() + "-" + prod.getTipo();
 		fila[2] = prod.getPrecio();
+
+		p = new ProductoCompra(prod, cant);
+
+		carrito.add(p);
+		tModel.addRow(fila);
 	}
-	
-	public void showList(ArrayList<Producto> lista) {
-		datosLista = lista;
+
+	public List<ProductoCompra> getDatosCompra() {
+		return carrito;
+	}
+
+	public void showList(List<Producto> lista) {
+		dlm.removeAllElements();
 		list.setModel(dlm);
-		
 		dlm.addAll(lista);
 	}
 
@@ -198,28 +207,39 @@ public class PCompra extends JPanel {
 	public void hacerVisible() {
 		setVisible(true);
 	}
-	
-	
-	public JList<Producto> getList(){
+
+	public JList<Producto> getList() {
 		return list;
 	}
-	
+
+	public JTable getTb() {
+		return tbCarrito;
+	}
+
 	public int getSpn() {
 		return (int) spinner.getValue();
 	}
-	
-	public Date getDate() {
+
+	public String getDate() {
 		long miliseconds = System.currentTimeMillis();
 		Date date = new Date(miliseconds);
-		return date;
+		
+		return date.toString();
 	}
-	
+
 	public Producto getSelectedProd() {
 		Producto item = list.getSelectedValue();
-		//String id = item.getIdProducto();
+		// String id = item.getIdProducto();
 		System.out.println(list.getSelectedValue());
 		return item;
-		
+
+	}
+
+	public ProductoCompra getSelectedP() {
+		ProductoCompra p;
+		int row = tbCarrito.getSelectedRow();
+		p = carrito.get(row);
+		return p;
 	}
 
 	public void setControlador(AppControl control) {
@@ -227,24 +247,20 @@ public class PCompra extends JPanel {
 		btnCarrito.addActionListener(control);
 		btnComprar.addActionListener(control);
 		btnEliminar.addActionListener(control);
-		btnVolver.addActionListener(control);
-		
 	}
-	
-	public void habilitarCompList(boolean a) {
-		spinner.setVisible(a);
-		btnCarrito.setVisible(a);
-	}
-	
-	public void  habilitarCompTb(boolean a, boolean b) {
-		btnComprar.setVisible(a);
-		btnEliminar.setVisible(b);
-		
-	}
-	
+
 	public void setError(String error) {
 		JOptionPane.showMessageDialog(this, error, "Error en datos", JOptionPane.ERROR_MESSAGE);
-		
+
 	}
-	
+
+	public void borrarFila(int fila) {
+		tModel.removeRow(fila);
+
+		ProductoCompra p = carrito.get(fila);
+
+		carrito.remove(p);
+
+	}
+
 }

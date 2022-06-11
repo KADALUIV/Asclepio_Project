@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -24,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.asclepio.control.AppControl;
 import com.asclepio.model.Producto;
+import com.asclepio.model.ProductoCompra;
 
 //import asclepio.view.PCompra;
 
@@ -54,6 +56,8 @@ public class PCompra extends JPanel {
 	private JScrollPane scrpLista;
 	
 	private ArrayList<Producto> datosLista;
+	private ArrayList<ProductoCompra> carrito = new ArrayList<ProductoCompra>();
+
 	
 	public PCompra() {
 		setForeground(new Color(0, 0, 0));
@@ -177,13 +181,26 @@ public class PCompra extends JPanel {
 	
 	public void rellenarTabla(Producto prod, int cant) {
 		Object[] fila = new Object[3];
+		ProductoCompra p;
 		
 		fila[0] = cant;
 		fila[1] = prod.getNomTipo();
 		fila[2] = prod.getPrecio();
+		
+		p = new ProductoCompra(prod.getNombre(), prod.getTipo(), prod.getPrecio(), cant);
+		
+		carrito.add(p);
+		tModel.addRow(fila);
+		
+	}
+	
+	public ArrayList<ProductoCompra> getDatosCompra() {
+
+	return carrito;
 	}
 	
 	public void showList(ArrayList<Producto> lista) {
+		datosLista = new ArrayList<>();
 		dlm.removeAllElements();
 		datosLista = lista;
 		list.setModel(dlm);

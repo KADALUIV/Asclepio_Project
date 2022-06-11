@@ -2,25 +2,24 @@ package com.asclepio.model;
 
 public class ProductoCompra {
 	
-	private String nombre;
+	private Producto producto;
 	private int cantidad;
-	private double precio;
 	
-	public ProductoCompra(String nombre, double precio, int cantidad) {
-		this.nombre = nombre;
+	public ProductoCompra(Producto producto, int cantidad) {
+		this.producto= producto;
 		this.cantidad = cantidad;
-		this.precio = precio;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public Producto getProducto() {
+		return this.producto;
 	}
 	
-	public double getPrecio() {
-		return precio;
-	}
-
 	public int getCantidad() {
 		return cantidad;
+	}
+
+	@Override
+	public String toString() {
+		return "ProductoCompra [producto " + this.producto.toString() + ", cantidad=" + cantidad + "]";
 	}
 }

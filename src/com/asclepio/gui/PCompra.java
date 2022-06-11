@@ -97,12 +97,6 @@ public class PCompra extends JPanel {
 		btnEliminar.setBounds(699, 556, 229, 48);
 		add(btnEliminar);
 
-		txtPago = new JTextField();
-		txtPago.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		txtPago.setBounds(788, 496, 104, 35);
-		add(txtPago);
-		txtPago.setColumns(10);
-		txtPago.setEditable(false);
 
 		scrpLista = new JScrollPane();
 		scrpLista.setBounds(88, 114, 335, 381);

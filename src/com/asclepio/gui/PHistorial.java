@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -119,6 +120,8 @@ public class PHistorial extends JPanel {
 	
 	public void setControlador(AppControl c) {
 		btnConsultar.addActionListener(c);
+		txtFecha.addActionListener(c);
+
 	}
 
 	public String getFecha() {
@@ -167,4 +170,7 @@ public class PHistorial extends JPanel {
 		setVisible(true);
 	}
 	
+	public JTextField getTxtFecha() {
+		return txtFecha;
+	}
 }

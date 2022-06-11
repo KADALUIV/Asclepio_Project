@@ -16,7 +16,7 @@ import java.awt.Color;
 
 public class VPrincipal extends JFrame{
 	private static final int ANCHO = 950;
-	private static final int ALTO = 850;
+	private static final int ALTO = 750;
 	public static final String JMENU_SALIR = "Log Out";
 	public static final String ITEM_MENU_LOGOUT = "Cerrar Sesión";
 	public static final String ITEM_MENU_EXIT = "Salir";
@@ -69,19 +69,19 @@ public class VPrincipal extends JFrame{
 		
 		scrollContainer = new JScrollPane();
 		scrollContainer.setVisible(false);
-		scrollContainer.setBounds(0, 0, 950, 661);
+		scrollContainer.setBounds(0, 0, 950, 568);
 		getContentPane().add(scrollContainer);
 		
 		btnHistorialC = new JButton(BTN_HISTORIAL_C);
-		btnHistorialC.setBounds(369, 720, 206, 53);
+		btnHistorialC.setBounds(358, 627, 206, 53);
 		getContentPane().add(btnHistorialC);
 		
 		btnSeeStock = new JButton(BTN_SEE_STOCK);
-		btnSeeStock.setBounds(151, 673, 206, 53);
+		btnSeeStock.setBounds(140, 580, 206, 53);
 		getContentPane().add(btnSeeStock);
 		
 		btnResgistrarC = new JButton(BTN_REGISTRAR_C);
-		btnResgistrarC.setBounds(587, 673, 206, 53);
+		btnResgistrarC.setBounds(576, 580, 206, 53);
 		getContentPane().add(btnResgistrarC);
 		
 		lblNewLabel = new JLabel("¿Qué necesitas hacer?");

@@ -52,7 +52,7 @@ public class VLogin extends JFrame {
 		getContentPane().add(txtPwd);
 		
 		btnLogin = new JButton(BTN_LOGIN);
-		btnLogin.setBounds(150, 174, 144, 29);
+		btnLogin.setBounds(167, 174, 115, 29);
 		getContentPane().add(btnLogin);
 		
 		JLabel lblidUsuario = new JLabel("ID Usuario:");

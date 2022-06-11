@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import com.asclepio.gui.PCompra;
 import com.asclepio.gui.PHistorial;
@@ -34,10 +35,10 @@ public class AppControl implements ActionListener {
 	PStock ps;
 	PHistorial ph;
 
-	public AppControl(VPrincipal vp, VLogin vl, PCompra pC, PStock ps, PHistorial pHist) {
+	public AppControl(VPrincipal vp, VLogin vl, PCompra pc, PStock ps, PHistorial pHist) {
 		this.vp = vp;
 		this.vl = vl;
-		this.pc = pC;
+		this.pc = pc;
 		this.ps = ps;
 		this.sql = new SqlQuery();
 		this.ph = pHist;
@@ -47,8 +48,10 @@ public class AppControl implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() instanceof JButton) {
-			if (e.getActionCommand().equals(PCompra.BTN_BUSQ)) {
+		if(e.getSource() instanceof JButton) {
+			JButton button = (JButton)e.getSource();
+			
+			if(e.getActionCommand().equals(PCompra.BTN_BUSQ)) {
 				searchProd();
 			} else if (e.getActionCommand().equals(PCompra.BTN_CARRITO)) {
 				addCarrito();
@@ -63,38 +66,50 @@ public class AppControl implements ActionListener {
 			} else if (e.getActionCommand().equals(PStock.BTN_REPONER_PSTOCK)) {
 				String idStock = ps.productoSeleccionado();
 				int cantidad = ps.cantidadReponer();
-
 				sql.reponerStock(idStock, cantidad);
-
-			} else if (e.getActionCommand().equals(VLogin.BTN_LOGIN) || e.getSource().equals(vl.getTxtPwd())) {
+				
+			}else if (e.getActionCommand().equals(VLogin.BTN_LOGIN)) {
+		
 				obtenerUsuario();
-			} else if (e.getActionCommand().equals(VPrincipal.BTN_SEE_STOCK)) {
-				System.out.println("Funciona Btn Stock");
+				
+				
+			}else if (e.getActionCommand().equals(VPrincipal.BTN_SEE_STOCK)) {
+				
 				vp.uploadPanel(ps);
 				vp.hacerVisible(true);
-
-			} else if (e.getActionCommand().equals(VPrincipal.BTN_REGISTRAR_C)) {
-				System.out.println("Funciona Btn Resgistrar");
+				
+				
+			}else if (e.getActionCommand().equals(VPrincipal.BTN_REGISTRAR_C)) {
+				
 				vp.uploadPanel(pc);
 				vp.hacerVisible(true);
-
-			} else if (e.getActionCommand().equals(VPrincipal.BTN_HISTORIAL_C)) {
-				System.out.println("Funciona Btn Hostorial");
+				
+			}else if (e.getActionCommand().equals(VPrincipal.BTN_HISTORIAL_C)) {
+			
 				vp.uploadPanel(ph);
 				vp.hacerVisible(true);
 
-			} else if (e.getActionCommand().equals(PHistorial.BTN_CONSULTAR)) {
-
-				ph.consultarProductos();
-
+			}else if (button.getToolTipText().equals(PHistorial.BTN_CONSULTAR)) {
+				this.consultarProductos();
 			}
-		} else if (e.getSource() instanceof JMenuItem) {
-
+			
+		}else if(e.getSource() instanceof JTextField){
+			if (e.getSource().equals(vl.getTxtPwd())) {
+				obtenerUsuario();
+				
+			} else if(e.getSource().equals(ph.getTxtFecha())) {
+				consultarProductos();
+			}
+			
+		}else if(e.getSource() instanceof JMenuItem){
+			
 			if (e.getActionCommand().equals(VPrincipal.ITEM_MENU_LOGOUT)) {
-				CurrentUser.setUsuario(null);
-			} else if (e.getActionCommand().equals(VPrincipal.ITEM_MENU_EXIT)) {
-
-				int option = JOptionPane.showConfirmDialog(vp, "¿Estás seguro que deseas salir?", "Confirmar Salida",
+				backLogin();
+				
+				
+			}else if (e.getActionCommand().equals(VPrincipal.ITEM_MENU_EXIT)) {
+				
+				int option = JOptionPane.showConfirmDialog(vp, "Â¿Estas seguro que deseas salir?", "Confirmar Salida", 
 						JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
 				if (option == JOptionPane.YES_OPTION) {
@@ -123,7 +138,7 @@ public class AppControl implements ActionListener {
 			if (result <= 0) {
 				pc.setError("Error en la base de datos");
 			} else {
-				JOptionPane.showMessageDialog(pc, "Los datos se actualizaron correctamente", "Resultado de Operación",
+				JOptionPane.showMessageDialog(pc, "Los datos se actualizaron correctamente", "Resultado de Operaciï¿½n",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
 
@@ -148,10 +163,21 @@ public class AppControl implements ActionListener {
 
 	}
 
+	private void backLogin() {
+		vp.dispose();
+		vl.cleanData();
+		vl.hacerVisible();
+		
+		
+		
+	}
+
+
+
 	private void addCarrito() {
 
 		if (pc.getList().getSelectedIndex() == -1) {
-			pc.setError("Debe seleccionar el elemento a añadir");
+			pc.setError("Debe seleccionar el elemento a aï¿½adir");
 		} else {
 
 			Producto prod = pc.getSelectedProd();
@@ -218,11 +244,12 @@ public class AppControl implements ActionListener {
 				acceso = false;
 				vl.dispose();
 				vp.showVPrincipal();
+				contAcces = 0;
 			}
 
 			if (acceso) {
 				if (contAcces < 3) {
-					error += "Te qudan " + (TOTAL_INTENTOS - contAcces) + " intentos";
+					error += "\nTe qudan " + (TOTAL_INTENTOS - contAcces) + " intentos";
 					vl.setError(error);
 
 				} else {
@@ -235,5 +262,15 @@ public class AppControl implements ActionListener {
 
 		}
 
+	}
+	
+	public void consultarProductos() {
+		
+		String fecha = ph.getFecha();
+		
+		SqlQuery productoContract = new SqlQuery();
+		ArrayList<ProductoCompra> productos = productoContract.consultarProductos(fecha);
+		ph.rellenarTabla(productos);	
+		
 	}
 }

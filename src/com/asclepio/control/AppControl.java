@@ -139,13 +139,14 @@ public class AppControl implements ActionListener {
 		vl.hacerVisible();
 		
 		
+		
 	}
 
 
 
 	private void addCarrito() {
 		if (pc.getList().getSelectedIndex() == -1) {
-			JOptionPane.showMessageDialog(pc, "Debe seleccionar el elemento a a�adir", "Error de selecci�n",
+			JOptionPane.showMessageDialog(pc, "Debe seleccionar el elemento a añadir", "Error de selección",
 					JOptionPane.ERROR_MESSAGE);
 		} else {
 			
@@ -209,11 +210,12 @@ public class AppControl implements ActionListener {
 				acceso = false;
 				vl.dispose();
 				vp.showVPrincipal();
+				contAcces = 0;
 			}
 
 			if (acceso) {
 				if (contAcces < 3) {
-					error += "Te qudan " + (TOTAL_INTENTOS - contAcces) + " intentos";
+					error += "\nTe qudan " + (TOTAL_INTENTOS - contAcces) + " intentos";
 					vl.setError(error);
 
 				} else {

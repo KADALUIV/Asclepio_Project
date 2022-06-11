@@ -17,11 +17,14 @@ import com.asclepio.model.Usuario;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 public class VLogin extends JFrame {
-	public static final String BTN_LOGIN = "Login";
-	private static final int ANCHO = 450;
-	private static final int ALTO = 300;
+	public static final String BTN_LOGIN = "LOGIN";
+	private static final int ANCHO = 700;
+	private static final int ALTO = 500;
+	
 	
 	private JTextField txtUsuario;
 	private JPasswordField txtPwd;
@@ -35,33 +38,49 @@ public class VLogin extends JFrame {
 		setTitle("User Login");
 		getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("ASCLEPIO");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setForeground(Color.BLACK);
-		lblNewLabel.setFont(new Font("Lucida Grande", Font.BOLD, 38));
-		lblNewLabel.setBounds(81, 19, 267, 37);
-		getContentPane().add(lblNewLabel);
-		
 		txtUsuario = new JTextField();
-		txtUsuario.setBounds(150, 68, 157, 35);
+		txtUsuario.setBounds(195, 214, 157, 35);
 		getContentPane().add(txtUsuario);
 		txtUsuario.setColumns(10);
 		
 		txtPwd = new JPasswordField();
-		txtPwd.setBounds(150, 127, 157, 35);
+		txtPwd.setBounds(195, 292, 157, 35);
 		getContentPane().add(txtPwd);
 		
 		btnLogin = new JButton(BTN_LOGIN);
-		btnLogin.setBounds(167, 174, 115, 29);
+		btnLogin.setFont(new Font("Roboto Light", Font.BOLD, 10));
+		btnLogin.setBounds(222, 365, 115, 29);
 		getContentPane().add(btnLogin);
 		
-		JLabel lblidUsuario = new JLabel("ID Usuario:");
-		lblidUsuario.setBounds(63, 77, 77, 16);
+	/*JLabel lblidUsuario = new JLabel("ID Usuario:");
+		lblidUsuario.setBounds(94, 223, 77, 16);
 		getContentPane().add(lblidUsuario);
 		
 		JLabel lblPwd = new JLabel("Password:");
-		lblPwd.setBounds(61, 136, 63, 16);
-		getContentPane().add(lblPwd);
+		lblPwd.setBounds(94, 301, 63, 16);
+		getContentPane().add(lblPwd);*/
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setIcon(new ImageIcon(VLogin.class.getResource("/img/image.png")));
+		lblNewLabel_1.setBounds(518, 0, 235, 463);
+		getContentPane().add(lblNewLabel_1);
+		
+		JPanel panel = new JPanel(null);
+		panel.setBackground(new Color(68, 174, 178));
+		panel.setBounds(0, 63, 556, 98);
+		getContentPane().add(panel);
+		
+		JLabel lblNewLabel = new JLabel("A S C L E P I O");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Roboto Medium", Font.BOLD, 38));
+		lblNewLabel.setBounds(171, 31, 267, 37);
+		panel.add(lblNewLabel);
+		lblNewLabel.setForeground(Color.BLACK);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setBounds(22, 0, 115, 90);
+		panel.add(lblNewLabel_2);
+		lblNewLabel_2.setIcon(new ImageIcon(VLogin.class.getResource("/img/logo.png")));
 		
 		setSize(ANCHO, ALTO);
 		centrarVentana();

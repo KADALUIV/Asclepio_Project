@@ -41,7 +41,7 @@ public class PStock extends JPanel{
 	private static JTextField txtBusqueda;
 	private JTable tblStock;
 	private JScrollPane scrollPane;
-	private JButton btnVolver;
+
 	private JButton btnBuscar;
 	private JSpinner spnCantidad;
 	private JButton btnReponer;
@@ -136,7 +136,7 @@ public class PStock extends JPanel{
 			row [0] = pro.getIdProducto();
 			row [1] = pro.getNombre();
 			row [2] = pro.getTipo();
-			row [3] = pro.getPrecio() +  "€";
+			row [3] = pro.getPrecio() +  "ï¿½";
 			row [4] = pro.getStock();
 			
 			tModel.addRow(row);
@@ -173,6 +173,8 @@ public class PStock extends JPanel{
 			int colum = 0;
 			int row = tblStock.getSelectedRow();
 			repo = tblStock.getModel().getValueAt(row, colum).toString();
+		}else {
+			mostrarError("Debes seleccionar el produto a reponer");
 		}
 		
 		
@@ -199,6 +201,12 @@ public class PStock extends JPanel{
 	public void reponerVisible() {
 		btnReponer.setVisible(productoSeleccionado() != null);
 		spnCantidad.setVisible(productoSeleccionado() != null);
+	}
+	
+	public void habComponents(boolean b) {
+		
+		btnReponer.setEnabled(b);
+		spnCantidad.setEnabled(b);
 	}
 	
 }

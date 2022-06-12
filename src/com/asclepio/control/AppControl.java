@@ -60,7 +60,8 @@ public class AppControl implements ActionListener {
 				buyProducts();
 			} else if (tooltipText.equals(PCompra.BTN_ELIMINAR)) {
 				deleteProd();
-			} else if (e.getActionCommand().equals(PStock.BTN_BUSQUEDA_PSTOCK)) {
+			} else if (tooltipText.equals(PStock.BTN_BUSQUEDA_PSTOCK)) {
+				System.out.println("by¡tn");
 				String palabra = PStock.obtenerTexto();
 				listaProd = sql.getSearchedProd(palabra);
 				ps.filtrarTabla(listaProd);

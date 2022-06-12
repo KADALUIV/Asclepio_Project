@@ -51,7 +51,7 @@ public class VLogin extends JFrame {
 		getContentPane().add(txtPwd);
 		
 		btnLogin = new JButton(BTN_LOGIN);
-		btnLogin.setFont(new Font("Roboto Light", Font.BOLD, 10));
+		btnLogin.setFont(new Font("Tahoma", Font.BOLD, 10));
 		btnLogin.setBounds(222, 365, 115, 29);
 		getContentPane().add(btnLogin);
 	
@@ -68,7 +68,7 @@ public class VLogin extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("A S C L E P I O");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Roboto Medium", Font.BOLD, 38));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 38));
 		lblNewLabel.setBounds(171, 31, 299, 37);
 		panel.add(lblNewLabel);
 		lblNewLabel.setForeground(Color.BLACK);

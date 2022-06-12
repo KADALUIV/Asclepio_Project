@@ -46,7 +46,6 @@ public class PCompra extends JPanel {
 	private DefaultTableModel tModel;
 	private JButton btnComprar;
 	private JButton btnEliminar;
-	private JTextField txtPago;
 	private JTextField txtBusq;
 	private JList<Producto> list;
 	private DefaultListModel<Producto> dlm;
@@ -115,7 +114,7 @@ public class PCompra extends JPanel {
 		scrpLista.setViewportView(list);
 		dlm = new DefaultListModel<Producto>();
 
-		JLabel lblBusq = new JLabel("B � S Q U E D A");
+		JLabel lblBusq = new JLabel("B Ú S Q U E D A");
 		lblBusq.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBusq.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblBusq.setBounds(88, 68, 335, 35);
@@ -138,15 +137,15 @@ public class PCompra extends JPanel {
 		// ImageIcon(PCompra.class.getResource("/img/carrito.jpg")));
 
 		txtBusq = new JTextField();
-		placeholder = new TextPrompt("B�squeda", txtBusq);
+		placeholder = new TextPrompt("Búsqueda", txtBusq);
 		txtBusq.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		txtBusq.setBounds(331, 22, 287, 35);
 		add(txtBusq);
 		txtBusq.setColumns(10);
-		txtBusq.setToolTipText("B�squeda");
+		txtBusq.setToolTipText("Búsqueda");
 
 		btnBusq = new JButton("");
-		btnBusq.setToolTipText("Busqueda");
+		btnBusq.setToolTipText("Búsqueda");
 		btnBusq.setBorder(null);
 		btnBusq.setBackground(Color.WHITE);
 		btnBusq.setIcon(new ImageIcon(PCompra.class.getResource("/img/Search.jpeg")));

@@ -216,7 +216,6 @@ public class SqlQuery {
 				int stock = rslt.getInt("STOCK");
 				int cantidad = rslt.getInt("CANTIDAD_TOTAL");
 
-				 
 				Producto p = new Producto(id, nombre, tipo, precio, stock);
 				ProductoCompra producto = new ProductoCompra(p, cantidad);
 				productos.add(producto);
@@ -328,27 +327,27 @@ public class SqlQuery {
 
 	public int updateStockSum(String nom, String tipo, int cant) {
 		int resultado = 0;
-		
+
 		String query = "UPDATE " + ProductContract.NOMBRE_TABLA + " SET " + ProductContract.COLUMN_STOCK + " = "
-				+ ProductContract.COLUMN_STOCK + " + ? " + " WHERE UPPER( " + ProductContract.COLUMN_NOM  + " ) LIKE ? AND UPPER("
-				+ ProductContract.COLUMN_TIPO + ") LIKE ?;";
-		
+				+ ProductContract.COLUMN_STOCK + " + ? " + " WHERE UPPER( " + ProductContract.COLUMN_NOM
+				+ " ) LIKE ? AND UPPER(" + ProductContract.COLUMN_TIPO + ") LIKE ?;";
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
-			
+
 			con = acceso.getConnection();
-			
+
 			pstmt = con.prepareStatement(query);
-			
-			pstmt.setString(1, "%" + nom.toUpperCase() + "%");
-			pstmt.setString(2, "%" + tipo.toUpperCase() + "%");
-			pstmt.setInt(3, cant);
+
+			pstmt.setInt(1, cant);
+			pstmt.setString(2, "%" + nom.toUpperCase() + "%");
+			pstmt.setString(3, "%" + tipo.toUpperCase() + "%");
 
 			resultado = pstmt.executeUpdate();
-			
-		}catch (ClassNotFoundException e) {
+
+		} catch (ClassNotFoundException e) {
 			System.out.println("El driver indicado no es correcto");
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -369,18 +368,17 @@ public class SqlQuery {
 			}
 
 		}
-				
-		
+
 		return resultado;
 	}
 
 	public void insertTabla(List<ProductoCompra> compra, Usuario usuario, String fechaCompra) {
 		int[] result;
 
-		String query = "INSERT INTO " + CompraContract.NOMBRE_TABLA + "( " + CompraContract.COLUMN_IDCOMPRA + ", "
+		String query = "INSERT INTO " + CompraContract.NOMBRE_TABLA + "( "
 				+ CompraContract.COLUMN_FEC + ", " + CompraContract.COLUMN_IMP + ", " + CompraContract.COLUMN_IDUSER
 				+ ", " + CompraContract.COLUMN_IDSTOCK + ", " + CompraContract.COLUMN_CANT + ")"
-				+ " VALUES (?, ?, ?, ?, ?, ?);";
+				+ " VALUES (?, ?, ?, ?, ?);";
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -388,22 +386,18 @@ public class SqlQuery {
 		try {
 			con = acceso.getConnection();
 			pstmt = con.prepareStatement(query);
-			
-			int j = 1;
-			
-				for (ProductoCompra p : compra) {
-						pstmt.setInt(1, j);
-						pstmt.setString(2, fechaCompra);
-						pstmt.setDouble(3, p.getProducto().getPrecio());
-						pstmt.setInt(4, usuario.getIdUsuario());
-						pstmt.setString(5, p.getProducto().getIdProducto());
-						pstmt.setInt(6, p.getCantidad());
 
-						pstmt.addBatch();
-						j++;
-				}
-			
-			
+			for (ProductoCompra p : compra) {
+
+				pstmt.setString(1, fechaCompra);
+				pstmt.setDouble(2, p.getProducto().getPrecio());
+				pstmt.setInt(3, usuario.getIdUsuario());
+				pstmt.setString(4, p.getProducto().getIdProducto());
+				pstmt.setInt(5, p.getCantidad());
+
+				pstmt.addBatch();
+
+			}
 
 			result = pstmt.executeBatch();
 

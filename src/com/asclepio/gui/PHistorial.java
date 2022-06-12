@@ -83,7 +83,7 @@ public class PHistorial extends JPanel {
 		
 		btnConsultar = new JButton("");
 		btnConsultar.setToolTipText("Consultar");
-		//btnConsultar.setIcon(new ImageIcon(PHistorial.class.getResource("/img/search.png")));
+		btnConsultar.setIcon(new ImageIcon(PHistorial.class.getResource("/img/Search.jpeg")));
 		btnConsultar.setBounds(710, 95, 35, 34);
 		add(btnConsultar);
 		

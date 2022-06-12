@@ -50,8 +50,9 @@ public class AppControl implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() instanceof JButton) {
 			JButton button = (JButton)e.getSource();
+			String tooltipText = tooltipTextNotNull(button);
 			
-			if(button.getToolTipText().equals(PCompra.BTN_BUSQ)) {
+			if(tooltipText.equals(PCompra.BTN_BUSQ)) {
 				searchProd();
 			} else if (e.getActionCommand().equals(PCompra.BTN_CARRITO)) {
 				addCarrito();
@@ -120,6 +121,14 @@ public class AppControl implements ActionListener {
 			}
 		}
 
+	}
+
+	private String tooltipTextNotNull(JButton button) {
+		String tooltipText = button.getToolTipText();
+		if (tooltipText == null) {
+			tooltipText = "";
+		}
+		return tooltipText;
 	}
 
 	private void deleteProd() {

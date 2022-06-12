@@ -84,7 +84,7 @@ public class VPrincipal extends JFrame{
 		btnResgistrarC.setBounds(579, 666, 206, 53);
 		getContentPane().add(btnResgistrarC);
 		
-		lblNewLabel = new JLabel("¿ Q U É  N E C E S I T A S  H A C E R ?");
+		lblNewLabel = new JLabel("Â¿ Q U Ã‰  N E C E S I T A S  H A C E R ?");
 		lblNewLabel.setBounds(0, 0, 946, 466);
 		getContentPane().add(lblNewLabel);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);

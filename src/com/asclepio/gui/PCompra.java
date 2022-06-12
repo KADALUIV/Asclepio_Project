@@ -114,7 +114,7 @@ public class PCompra extends JPanel {
 		scrpLista.setViewportView(list);
 		dlm = new DefaultListModel<Producto>();
 
-		JLabel lblBusq = new JLabel("B � S Q U E D A");
+		JLabel lblBusq = new JLabel("B Ú S Q U E D A");
 		lblBusq.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBusq.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblBusq.setBounds(88, 68, 335, 35);
@@ -137,15 +137,15 @@ public class PCompra extends JPanel {
 		// ImageIcon(PCompra.class.getResource("/img/carrito.jpg")));
 
 		txtBusq = new JTextField();
-		placeholder = new TextPrompt("B�squeda", txtBusq);
+		placeholder = new TextPrompt("Búsqueda", txtBusq);
 		txtBusq.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		txtBusq.setBounds(331, 22, 287, 35);
 		add(txtBusq);
 		txtBusq.setColumns(10);
-		txtBusq.setToolTipText("B�squeda");
+		txtBusq.setToolTipText("Búsqueda");
 
 		btnBusq = new JButton("");
-		btnBusq.setToolTipText("Busqueda");
+		btnBusq.setToolTipText("Búsqueda");
 		btnBusq.setBorder(null);
 		btnBusq.setBackground(Color.WHITE);
 		btnBusq.setIcon(new ImageIcon(PCompra.class.getResource("/img/Search.jpeg")));
@@ -192,7 +192,7 @@ public class PCompra extends JPanel {
 		fila[2] = prod.getPrecio();
 
 		p = new ProductoCompra(prod, cant);
-
+		
 		carrito.add(p);
 		tModel.addRow(fila);
 	}
@@ -271,6 +271,20 @@ public class PCompra extends JPanel {
 
 		carrito.remove(p);
 
+	}
+
+	public void removeElements() {
+		carrito.removeAll(carrito);
+		int rows = tModel.getRowCount()-1;
+		
+        for (int i = rows; i >= 0; i--) {          
+        tModel.removeRow(tModel.getRowCount()-1);
+        }
+        
+        System.out.println(carrito);
+        
+	
+		
 	}
 
 }

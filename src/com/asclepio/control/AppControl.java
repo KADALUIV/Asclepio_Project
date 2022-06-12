@@ -67,6 +67,7 @@ public class AppControl implements ActionListener {
 				String idStock = ps.productoSeleccionado();
 				int cantidad = ps.cantidadReponer();
 				sql.reponerStock(idStock, cantidad);
+
 				
 			}else if (e.getActionCommand().equals(VLogin.BTN_LOGIN)) {
 		

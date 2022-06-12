@@ -60,8 +60,7 @@ public class AppControl implements ActionListener {
 				buyProducts();
 			} else if (tooltipText.equals(PCompra.BTN_ELIMINAR)) {
 				deleteProd();
-			} else if (tooltipText.equals(PStock.BTN_BUSQUEDA_PSTOCK)) {
-				System.out.println("by¡tn");
+			} else if (e.getActionCommand().equals(PStock.BTN_BUSQUEDA_PSTOCK)) {
 				String palabra = PStock.obtenerTexto();
 				listaProd = sql.getSearchedProd(palabra);
 				ps.filtrarTabla(listaProd);
@@ -177,17 +176,16 @@ public class AppControl implements ActionListener {
 			System.out.println(p.getCantidad());
 		}
 		sql.insertTabla(compra, usuario, fechaCompra);
-
-
+		
+		
+		pc.removeElements();
+		
 	}
 
 	private void backLogin() {
 		vp.dispose();
 		vl.cleanData();
 		vl.hacerVisible();
-		
-		
-		
 	}
 
 

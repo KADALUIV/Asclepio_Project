@@ -192,7 +192,7 @@ public class PCompra extends JPanel {
 		fila[2] = prod.getPrecio();
 
 		p = new ProductoCompra(prod, cant);
-
+		
 		carrito.add(p);
 		tModel.addRow(fila);
 	}
@@ -271,6 +271,13 @@ public class PCompra extends JPanel {
 
 		carrito.remove(p);
 
+	}
+
+	public void removeElements() {
+		carrito.removeAll(carrito);
+		int rows = tModel.getRowCount();
+	
+		
 	}
 
 }

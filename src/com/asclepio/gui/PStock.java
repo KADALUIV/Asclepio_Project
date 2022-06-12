@@ -81,10 +81,8 @@ public class PStock extends JPanel{
 		scrollPane.setViewportView(tblStock);
 		
 		
-		btnBuscar = new JButton("");
-		btnBuscar.setToolTipText("Busqueda");
+		btnBuscar = new JButton(BTN_BUSQUEDA_PSTOCK );
 		btnBuscar.setBackground(Color.WHITE);
-		btnBuscar.setIcon(new ImageIcon(PStock.class.getResource("/img/Search.jpeg")));
 		btnBuscar.setBorder(null);
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnBuscar.setBounds(708, 105, 35, 34);

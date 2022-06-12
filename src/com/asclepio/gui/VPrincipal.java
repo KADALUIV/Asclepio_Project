@@ -18,11 +18,11 @@ public class VPrincipal extends JFrame{
 	private static final int ANCHO = 950;
 	private static final int ALTO = 850;
 	public static final String JMENU_SALIR = "Log Out";
-	public static final String ITEM_MENU_LOGOUT = "Cerrar Sesión";
+	public static final String ITEM_MENU_LOGOUT = "Cerrar SesiÃ³n";
 	public static final String ITEM_MENU_EXIT = "Salir";
-	public static final String BTN_SEE_STOCK = "Consultar Stock";
-	public static final String BTN_REGISTRAR_C = "Registrar Compra";
-	public static final String BTN_HISTORIAL_C = "Historial de Compra";
+	public static final String BTN_SEE_STOCK = "CONSULTAR STOCK";
+	public static final String BTN_REGISTRAR_C = "REGISTRAR COMPRA";
+	public static final String BTN_HISTORIAL_C = "HISTORIAL COMPRA";
 	private JMenu jMenu;
 	private JMenuItem itemMenuCerrarSesion;
 	private JMenuItem itemMenuSalir;
@@ -84,11 +84,31 @@ public class VPrincipal extends JFrame{
 		btnResgistrarC.setBounds(579, 666, 206, 53);
 		getContentPane().add(btnResgistrarC);
 		
-		lblNewLabel = new JLabel("¿Qué necesitas hacer?");
+		lblNewLabel = new JLabel("¿ Q U É  N E C E S I T A S  H A C E R ?");
 		lblNewLabel.setBounds(0, 0, 946, 466);
 		getContentPane().add(lblNewLabel);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Lucida Grande", Font.BOLD, 30));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(VPrincipal.class.getResource("/img/image.png")));
+		lblNewLabel_1.setBounds(0, 647, 298, 144);
+		getContentPane().add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon(VPrincipal.class.getResource("/img/image.png")));
+		lblNewLabel_2.setBounds(292, 647, 298, 144);
+		getContentPane().add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.setIcon(new ImageIcon(VPrincipal.class.getResource("/img/image.png")));
+		lblNewLabel_3.setBounds(577, 647, 276, 144);
+		getContentPane().add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setIcon(new ImageIcon(VPrincipal.class.getResource("/img/image.png")));
+		lblNewLabel_4.setBounds(849, 647, 133, 144);
+		getContentPane().add(lblNewLabel_4);
 		setSize(ANCHO,ALTO);
 		centrarVentana();
 	}
@@ -137,10 +157,4 @@ public class VPrincipal extends JFrame{
 		scrollContainer.setViewportView(panel);
 		
 	}
-	
-	
-	
-
-	
-	
 }

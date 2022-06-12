@@ -50,24 +50,30 @@ public class AppControl implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() instanceof JButton) {
 			JButton button = (JButton)e.getSource();
+			String tooltipText = tooltipTextNotNull(button);
 			
-			if(e.getActionCommand().equals(PCompra.BTN_BUSQ)) {
+			if(tooltipText.equals(PCompra.BTN_BUSQ)) {
 				searchProd();
-			} else if (e.getActionCommand().equals(PCompra.BTN_CARRITO)) {
+			} else if (tooltipText.equals(PCompra.BTN_CARRITO)) {
 				addCarrito();
-			} else if (e.getActionCommand().equals(PCompra.BTN_COMPRAR)) {
+			} else if (tooltipText.equals(PCompra.BTN_COMPRAR)) {
 				buyProducts();
-			} else if (e.getActionCommand().equals(PCompra.BTN_ELIMINAR)) {
+			} else if (tooltipText.equals(PCompra.BTN_ELIMINAR)) {
 				deleteProd();
-			} else if (e.getActionCommand().equals(PStock.BTN_BUSQUEDA_PSTOCK)) {
+			} else if (tooltipText.equals(PStock.BTN_BUSQUEDA_PSTOCK)) {
+				System.out.println("by¡tn");
 				String palabra = PStock.obtenerTexto();
 				listaProd = sql.getSearchedProd(palabra);
 				ps.filtrarTabla(listaProd);
+				ps.habComponents(true);
 			} else if (e.getActionCommand().equals(PStock.BTN_REPONER_PSTOCK)) {
 				String idStock = ps.productoSeleccionado();
-				int cantidad = ps.cantidadReponer();
-				sql.reponerStock(idStock, cantidad);
+				if (idStock != null) {
+					int cantidad = ps.cantidadReponer();
+					sql.reponerStock(idStock, cantidad);
 
+				}
+				
 				
 			}else if (e.getActionCommand().equals(VLogin.BTN_LOGIN)) {
 		
@@ -77,7 +83,9 @@ public class AppControl implements ActionListener {
 			}else if (e.getActionCommand().equals(VPrincipal.BTN_SEE_STOCK)) {
 				
 				vp.uploadPanel(ps);
+				ps.habComponents(false);
 				vp.hacerVisible(true);
+				
 				
 				
 			}else if (e.getActionCommand().equals(VPrincipal.BTN_REGISTRAR_C)) {
@@ -95,7 +103,8 @@ public class AppControl implements ActionListener {
 			}
 			
 		}else if(e.getSource() instanceof JTextField){
-			if (e.getSource().equals(vl.getTxtPwd())) {
+			if (e.getSource().equals(vl.getTxtPwd()) || e.getSource().equals(vl.getTxtUsuario())) {
+				
 				obtenerUsuario();
 				
 			} else if(e.getSource().equals(ph.getTxtFecha())) {
@@ -122,6 +131,14 @@ public class AppControl implements ActionListener {
 
 	}
 
+	private String tooltipTextNotNull(JButton button) {
+		String tooltipText = button.getToolTipText();
+		if (tooltipText == null) {
+			tooltipText = "";
+		}
+		return tooltipText;
+	}
+
 	private void deleteProd() {
 
 		if (pc.getTb().getSelectedRow() == -1) {
@@ -139,7 +156,7 @@ public class AppControl implements ActionListener {
 			if (result <= 0) {
 				pc.setError("Error en la base de datos");
 			} else {
-				JOptionPane.showMessageDialog(pc, "Los datos se actualizaron correctamente", "Resultado de OperaciÃ³n",
+				JOptionPane.showMessageDialog(pc, "Los datos se actualizaron correctamente", "Resultado de Operaciï¿½n",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
 
@@ -271,7 +288,7 @@ public class AppControl implements ActionListener {
 		
 		SqlQuery productoContract = new SqlQuery();
 		ArrayList<ProductoCompra> productos = productoContract.consultarProductos(fecha);
-		ph.rellenarTabla(productos);
+		ph.rellenarTabla(productos);	
 		
 	}
 }

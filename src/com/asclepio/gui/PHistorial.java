@@ -25,6 +25,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import java.awt.event.KeyAdapter;
+import java.awt.Color;
 
 public class PHistorial extends JPanel {
 	private static final int ANCHO = 950;
@@ -42,8 +43,10 @@ public class PHistorial extends JPanel {
 	private JTextField txtPrecioTotal;
 	private DefaultTableModel dtm;
 	private JScrollPane scrollPane;
+	private TextPrompt placeholder;
 	
 	public PHistorial() {
+		setBackground(Color.WHITE);
 		init();
 	}
 
@@ -51,17 +54,14 @@ public class PHistorial extends JPanel {
 		setSize(ANCHO, ALTO);
 		setLayout(null);
 		
-		JLabel lblHistorialCompra = new JLabel("Historial Compra");
-		lblHistorialCompra.setFont(new Font("Tahoma", Font.BOLD, 24));
-		lblHistorialCompra.setBounds(312, 33, 304, 34);
+		JLabel lblHistorialCompra = new JLabel("H I S T O R I A L    C O M P R A");
+		lblHistorialCompra.setFont(new Font("Tahoma", Font.BOLD, 36));
+		lblHistorialCompra.setBounds(194, 33, 562, 34);
 		add(lblHistorialCompra);
 		
-		JLabel lblFecha = new JLabel("Introduce una fecha:");
-		lblFecha.setBounds(55, 107, 134, 13);
-		add(lblFecha);
-		
 		txtFecha = new JTextField();
-		txtFecha.setBounds(192, 104, 492, 19);
+		placeholder = new TextPrompt("Introduce una fecha", txtFecha);
+		txtFecha.setBounds(192, 104, 492, 35);
 		add(txtFecha);
 		txtFecha.setColumns(10);
 		
@@ -71,6 +71,7 @@ public class PHistorial extends JPanel {
 		add(scrollPane);
 		
 		tblHistorial = new JTable();
+		tblHistorial.setBackground(Color.WHITE);
 		scrollPane.setViewportView(tblHistorial);
 		
 		txtPrecioTotal = new JTextField();
@@ -83,8 +84,9 @@ public class PHistorial extends JPanel {
 		
 		btnConsultar = new JButton("");
 		btnConsultar.setToolTipText("Consultar");
-		//btnConsultar.setIcon(new ImageIcon(PHistorial.class.getResource("/img/search.png")));
-		btnConsultar.setBounds(710, 95, 35, 34);
+		btnConsultar.setBorder(null);
+		btnConsultar.setIcon(new ImageIcon(PHistorial.class.getResource("/img/Search.jpeg")));
+		btnConsultar.setBounds(709, 105, 35, 34);
 		add(btnConsultar);
 		
 		//centrarVentana();

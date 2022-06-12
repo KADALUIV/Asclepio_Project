@@ -36,11 +36,10 @@ public class PCompra extends JPanel {
 	public static final int ALTO = 650;
 	public static final int ANCHO = 950;
 
-	public static final String BTN_COMPRAR = "COMPRAR";
-	public static final String BTN_ELIMINAR = "ELIMINAR";
-	public static final String BTN_VOLVER = "VOLVER";
+	public static final String BTN_COMPRAR = "Comprar";
+	public static final String BTN_ELIMINAR = "Eliminar";
 	public static final String BTN_BUSQ = "Busqueda";
-	public static final String BTN_CARRITO = "CARRITO";
+	public static final String BTN_CARRITO = "Carrito";
 
 	private JScrollPane scrpCarrito;
 	private JTable tbCarrito;
@@ -55,6 +54,7 @@ public class PCompra extends JPanel {
 	private JButton btnCarrito;
 	private JSpinner spinner;
 	private JScrollPane scrpLista;
+	private TextPrompt placeholder;
 
 	private List<ProductoCompra> carrito;
 
@@ -69,7 +69,7 @@ public class PCompra extends JPanel {
 		setLayout(null);
 		setSize(ANCHO, ALTO);
 
-		JLabel lblCarrito = new JLabel("CARRITO");
+		JLabel lblCarrito = new JLabel("C A R R I T O");
 		lblCarrito.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCarrito.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblCarrito.setBounds(557, 68, 335, 35);
@@ -88,15 +88,21 @@ public class PCompra extends JPanel {
 		// UN PRODUCTO SEA SELECCIONADO, EL BOTï¿½N COMPRAR SE CAMBIARï¿½ AL
 		// DE ELIMINAR (PONIENDO VISIBLE UNO E INVISIBLE OTRO)
 		btnComprar = new JButton("");
-		btnComprar.setToolTipText(BTN_COMPRAR);
+		btnComprar.setBackground(Color.WHITE);
+		btnComprar.setBorder(null);
+		btnComprar.setIcon(new ImageIcon(PCompra.class.getResource("/img/tick (1).png")));
+		btnComprar.setToolTipText("Comprar");
 		btnComprar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnComprar.setBounds(460, 556, 229, 48);
+		btnComprar.setBounds(616, 556, 77, 48);
 		add(btnComprar);
 
 		btnEliminar = new JButton("");
-		btnEliminar.setToolTipText(BTN_ELIMINAR);
+		btnEliminar.setBackground(Color.WHITE);
+		btnEliminar.setBorder(null);
+		btnEliminar.setIcon(new ImageIcon(PCompra.class.getResource("/img/delete (1).png")));
+		btnEliminar.setToolTipText("Eliminar");
 		btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnEliminar.setBounds(699, 556, 229, 48);
+		btnEliminar.setBounds(771, 556, 77, 48);
 		add(btnEliminar);
 
 
@@ -109,7 +115,7 @@ public class PCompra extends JPanel {
 		scrpLista.setViewportView(list);
 		dlm = new DefaultListModel<Producto>();
 
-		JLabel lblBusq = new JLabel("B\u00DASQUEDA");
+		JLabel lblBusq = new JLabel("B Ú S Q U E D A");
 		lblBusq.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBusq.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblBusq.setBounds(88, 68, 335, 35);
@@ -121,14 +127,18 @@ public class PCompra extends JPanel {
 		add(spinner);
 
 		btnCarrito = new JButton("");
-		btnCarrito.setToolTipText(BTN_CARRITO);
+		btnCarrito.setBackground(Color.WHITE);
+		btnCarrito.setBorder(null);
+		btnCarrito.setIcon(new ImageIcon(PCompra.class.getResource("/img/carrito-de-compras (1).png")));
+		btnCarrito.setToolTipText("Carrito");
 		btnCarrito.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnCarrito.setBounds(263, 556, 114, 48);
+		btnCarrito.setBounds(243, 556, 56, 48);
 		add(btnCarrito);
 		// btnCarrito.setIcon(new
 		// ImageIcon(PCompra.class.getResource("/img/carrito.jpg")));
 
 		txtBusq = new JTextField();
+		placeholder = new TextPrompt("Búsqueda", txtBusq);
 		txtBusq.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		txtBusq.setBounds(331, 22, 287, 35);
 		add(txtBusq);
@@ -137,6 +147,7 @@ public class PCompra extends JPanel {
 
 		btnBusq = new JButton("");
 		btnBusq.setToolTipText("Busqueda");
+		btnBusq.setBorder(null);
 		btnBusq.setBackground(Color.WHITE);
 		btnBusq.setIcon(new ImageIcon(PCompra.class.getResource("/img/Search.jpeg")));
 		btnBusq.setFont(new Font("Tahoma", Font.PLAIN, 12));

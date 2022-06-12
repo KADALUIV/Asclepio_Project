@@ -54,11 +54,11 @@ public class AppControl implements ActionListener {
 			
 			if(tooltipText.equals(PCompra.BTN_BUSQ)) {
 				searchProd();
-			} else if (e.getActionCommand().equals(PCompra.BTN_CARRITO)) {
+			} else if (tooltipText.equals(PCompra.BTN_CARRITO)) {
 				addCarrito();
-			} else if (e.getActionCommand().equals(PCompra.BTN_COMPRAR)) {
+			} else if (tooltipText.equals(PCompra.BTN_COMPRAR)) {
 				buyProducts();
-			} else if (e.getActionCommand().equals(PCompra.BTN_ELIMINAR)) {
+			} else if (tooltipText.equals(PCompra.BTN_ELIMINAR)) {
 				deleteProd();
 			} else if (e.getActionCommand().equals(PStock.BTN_BUSQUEDA_PSTOCK)) {
 				String palabra = PStock.obtenerTexto();

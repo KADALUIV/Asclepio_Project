@@ -177,17 +177,16 @@ public class AppControl implements ActionListener {
 			System.out.println(p.getCantidad());
 		}
 		sql.insertTabla(compra, usuario, fechaCompra);
-
-
+		
+		
+		pc.removeElements();
+		
 	}
 
 	private void backLogin() {
 		vp.dispose();
 		vl.cleanData();
 		vl.hacerVisible();
-		
-		
-		
 	}
 
 

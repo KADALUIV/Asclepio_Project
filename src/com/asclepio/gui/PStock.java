@@ -29,7 +29,7 @@ public class PStock extends JPanel{
 	static final int ALTO = 600;
 	static final int ANCHO = 950;
 	
-	public static final String BTN_BUSQUEDA_PSTOCK = "Busqueda";
+	public static final String BTN_BUSQUEDA_PSTOCK = "";
 	public static final String BTN_REPONER_PSTOCK = "Reponer";
 	
 	private static final String ID_PRODUCTO = "ID-Producto";
@@ -66,7 +66,11 @@ public class PStock extends JPanel{
 		add(lblStock);
 		
 		txtBusqueda = new JTextField();
+<<<<<<< HEAD
 		placeholder = new TextPrompt("Búsqueda", txtBusqueda);
+=======
+		placeholder = new TextPrompt("B�squeda", txtBusqueda);
+>>>>>>> 40261f76c0bc23ee4ab1e458ddf06757a7db778a
 		txtBusqueda.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtBusqueda.setBounds(189, 104, 459, 35);
 		add(txtBusqueda);
@@ -87,6 +91,9 @@ public class PStock extends JPanel{
 		btnBuscar.setIcon(new ImageIcon(PStock.class.getResource("/img/Search.jpeg")));
 		btnBuscar.setBorder(null);
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnBuscar = new JButton(BTN_BUSQUEDA_PSTOCK);
+		btnBuscar.setBorder(null);
+		btnBuscar.setIcon(new ImageIcon(PHistorial.class.getResource("/img/Search.jpeg")));
 		btnBuscar.setBounds(708, 105, 35, 34);
 		add(btnBuscar);
 		

@@ -54,6 +54,8 @@ public class AppControl implements ActionListener {
 			
 			if(tooltipText.equals(PCompra.BTN_BUSQ)) {
 				searchProd();
+			} else if (tooltipText.equals(PHistorial.BTN_CONSULTAR)) {
+				this.consultarProductos();
 			} else if (tooltipText.equals(PCompra.BTN_CARRITO)) {
 				addCarrito();
 			} else if (tooltipText.equals(PCompra.BTN_COMPRAR)) {
@@ -98,8 +100,6 @@ public class AppControl implements ActionListener {
 				vp.uploadPanel(ph);
 				vp.hacerVisible(true);
 
-			}else if (button.getToolTipText().equals(PHistorial.BTN_CONSULTAR)) {
-				this.consultarProductos();
 			}
 			
 		}else if(e.getSource() instanceof JTextField){

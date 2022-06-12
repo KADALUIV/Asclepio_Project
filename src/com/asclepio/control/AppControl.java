@@ -51,7 +51,7 @@ public class AppControl implements ActionListener {
 		if(e.getSource() instanceof JButton) {
 			JButton button = (JButton)e.getSource();
 			
-			if(e.getActionCommand().equals(PCompra.BTN_BUSQ)) {
+			if(button.getToolTipText().equals(PCompra.BTN_BUSQ)) {
 				searchProd();
 			} else if (e.getActionCommand().equals(PCompra.BTN_CARRITO)) {
 				addCarrito();
@@ -139,7 +139,7 @@ public class AppControl implements ActionListener {
 			if (result <= 0) {
 				pc.setError("Error en la base de datos");
 			} else {
-				JOptionPane.showMessageDialog(pc, "Los datos se actualizaron correctamente", "Resultado de Operación",
+				JOptionPane.showMessageDialog(pc, "Los datos se actualizaron correctamente", "Resultado de Operaci�n",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
 
@@ -271,7 +271,7 @@ public class AppControl implements ActionListener {
 		
 		SqlQuery productoContract = new SqlQuery();
 		ArrayList<ProductoCompra> productos = productoContract.consultarProductos(fecha);
-		ph.rellenarTabla(productos);
+		ph.rellenarTabla(productos);	
 		
 	}
 }

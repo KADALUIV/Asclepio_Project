@@ -89,6 +89,26 @@ public class VPrincipal extends JFrame{
 		getContentPane().add(lblNewLabel);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Lucida Grande", Font.BOLD, 30));
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(VPrincipal.class.getResource("/img/image.png")));
+		lblNewLabel_1.setBounds(0, 647, 298, 144);
+		getContentPane().add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon(VPrincipal.class.getResource("/img/image.png")));
+		lblNewLabel_2.setBounds(292, 647, 298, 144);
+		getContentPane().add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.setIcon(new ImageIcon(VPrincipal.class.getResource("/img/image.png")));
+		lblNewLabel_3.setBounds(577, 647, 276, 144);
+		getContentPane().add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setIcon(new ImageIcon(VPrincipal.class.getResource("/img/image.png")));
+		lblNewLabel_4.setBounds(849, 647, 133, 144);
+		getContentPane().add(lblNewLabel_4);
 		setSize(ANCHO,ALTO);
 		centrarVentana();
 	}
@@ -137,10 +157,4 @@ public class VPrincipal extends JFrame{
 		scrollContainer.setViewportView(panel);
 		
 	}
-	
-	
-	
-
-	
-	
 }

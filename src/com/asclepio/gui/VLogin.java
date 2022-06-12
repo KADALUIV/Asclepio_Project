@@ -29,6 +29,7 @@ public class VLogin extends JFrame {
 	private JTextField txtUsuario;
 	private JPasswordField txtPwd;
 	private JButton btnLogin;
+	private TextPrompt placeholder;
 	
 	public VLogin() {
 		initComponents();
@@ -39,11 +40,13 @@ public class VLogin extends JFrame {
 		getContentPane().setLayout(null);
 		
 		txtUsuario = new JTextField();
+		placeholder = new TextPrompt("ID Usuario", txtUsuario); 
 		txtUsuario.setBounds(195, 214, 157, 35);
 		getContentPane().add(txtUsuario);
 		txtUsuario.setColumns(10);
 		
 		txtPwd = new JPasswordField();
+		placeholder = new TextPrompt("Password", txtPwd);
 		txtPwd.setBounds(195, 292, 157, 35);
 		getContentPane().add(txtPwd);
 		
@@ -51,14 +54,7 @@ public class VLogin extends JFrame {
 		btnLogin.setFont(new Font("Roboto Light", Font.BOLD, 10));
 		btnLogin.setBounds(222, 365, 115, 29);
 		getContentPane().add(btnLogin);
-		
-	/*JLabel lblidUsuario = new JLabel("ID Usuario:");
-		lblidUsuario.setBounds(94, 223, 77, 16);
-		getContentPane().add(lblidUsuario);
-		
-		JLabel lblPwd = new JLabel("Password:");
-		lblPwd.setBounds(94, 301, 63, 16);
-		getContentPane().add(lblPwd);*/
+	
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		lblNewLabel_1.setIcon(new ImageIcon(VLogin.class.getResource("/img/image.png")));
@@ -104,6 +100,10 @@ public class VLogin extends JFrame {
 	
 	
 	
+	public JTextField getTxtUsuario() {
+		return txtUsuario;
+	}
+
 	public JButton getBtnLogin() {
 		return btnLogin;
 	}
@@ -123,6 +123,7 @@ public class VLogin extends JFrame {
 	public void setControlador(AppControl control) {
 		btnLogin.addActionListener(control);
 		txtPwd.addActionListener(control);
+		txtUsuario.addActionListener(control);
 		
 	}
 
@@ -134,6 +135,7 @@ public class VLogin extends JFrame {
 			
 			if (id <= 0) {
 				setError("El Id usuario debe ser un número entero positivo");
+				cleanData();
 			}else {
 				
 				String pwd = txtPwd.getText().trim();
@@ -150,6 +152,7 @@ public class VLogin extends JFrame {
 		
 		}catch (NumberFormatException e) {
 			setError("El Id usuario es numérico");
+			cleanData();
 		}
 		
 		

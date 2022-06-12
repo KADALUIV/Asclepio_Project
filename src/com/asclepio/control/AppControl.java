@@ -94,7 +94,7 @@ public class AppControl implements ActionListener {
 			}
 			
 		}else if(e.getSource() instanceof JTextField){
-			if (e.getSource().equals(vl.getTxtPwd())) {
+			if (e.getSource().equals(vl.getTxtPwd()) || e.getSource().equals(vl.getTxtUsuario())) {
 				obtenerUsuario();
 				
 			} else if(e.getSource().equals(ph.getTxtFecha())) {

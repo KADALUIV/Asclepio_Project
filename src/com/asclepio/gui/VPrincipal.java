@@ -20,9 +20,9 @@ public class VPrincipal extends JFrame{
 	public static final String JMENU_SALIR = "Log Out";
 	public static final String ITEM_MENU_LOGOUT = "Cerrar SesiÃ³n";
 	public static final String ITEM_MENU_EXIT = "Salir";
-	public static final String BTN_SEE_STOCK = "Consultar Stock";
-	public static final String BTN_REGISTRAR_C = "Registrar Compra";
-	public static final String BTN_HISTORIAL_C = "Historial de Compra";
+	public static final String BTN_SEE_STOCK = "CONSULTAR STOCK";
+	public static final String BTN_REGISTRAR_C = "REGISTRAR COMPRA";
+	public static final String BTN_HISTORIAL_C = "HISTORIAL COMPRA";
 	private JMenu jMenu;
 	private JMenuItem itemMenuCerrarSesion;
 	private JMenuItem itemMenuSalir;
@@ -84,11 +84,11 @@ public class VPrincipal extends JFrame{
 		btnResgistrarC.setBounds(579, 666, 206, 53);
 		getContentPane().add(btnResgistrarC);
 		
-		lblNewLabel = new JLabel("Â¿QuÃ© necesitas hacer?");
+		lblNewLabel = new JLabel("¿ Q U É  N E C E S I T A S  H A C E R ?");
 		lblNewLabel.setBounds(0, 0, 946, 466);
 		getContentPane().add(lblNewLabel);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Lucida Grande", Font.BOLD, 30));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon(VPrincipal.class.getResource("/img/image.png")));

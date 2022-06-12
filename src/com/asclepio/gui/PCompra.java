@@ -46,7 +46,6 @@ public class PCompra extends JPanel {
 	private DefaultTableModel tModel;
 	private JButton btnComprar;
 	private JButton btnEliminar;
-	private JTextField txtPago;
 	private JTextField txtBusq;
 	private JList<Producto> list;
 	private DefaultListModel<Producto> dlm;

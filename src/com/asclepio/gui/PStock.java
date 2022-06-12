@@ -21,6 +21,8 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
 
 public class PStock extends JPanel{
 	
@@ -45,8 +47,10 @@ public class PStock extends JPanel{
 	private JButton btnBuscar;
 	private JSpinner spnCantidad;
 	private JButton btnReponer;
+	private TextPrompt placeholder;
 	
 	public PStock() {
+		setBackground(Color.WHITE);
 		setForeground(Color.BLACK);
 		init();
 	}
@@ -55,21 +59,18 @@ public class PStock extends JPanel{
 		setLayout(null);
 		setSize(ANCHO,ALTO);
 		
-		JLabel lblStock = new JLabel("STOCK");
+		JLabel lblStock = new JLabel("S T O C K");
+		lblStock.setHorizontalAlignment(SwingConstants.CENTER);
 		lblStock.setFont(new Font("Tahoma", Font.BOLD, 36));
-		lblStock.setBounds(404, 33, 141, 44);
+		lblStock.setBounds(347, 33, 255, 44);
 		add(lblStock);
 		
 		txtBusqueda = new JTextField();
+		placeholder = new TextPrompt("Búsqueda", txtBusqueda);
 		txtBusqueda.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		txtBusqueda.setBounds(245, 109, 459, 35);
+		txtBusqueda.setBounds(189, 104, 459, 35);
 		add(txtBusqueda);
 		txtBusqueda.setColumns(10);
-		
-		JLabel lblBusqueda = new JLabel("Busqueda:");
-		lblBusqueda.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblBusqueda.setBounds(106, 109, 110, 35);
-		add(lblBusqueda);
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(38, 185, 872, 328);
@@ -80,9 +81,13 @@ public class PStock extends JPanel{
 		scrollPane.setViewportView(tblStock);
 		
 		
-		btnBuscar = new JButton(BTN_BUSQUEDA_PSTOCK);
+		btnBuscar = new JButton("");
+		btnBuscar.setToolTipText("Busqueda");
+		btnBuscar.setBackground(Color.WHITE);
+		btnBuscar.setIcon(new ImageIcon(PStock.class.getResource("/img/Search.jpeg")));
+		btnBuscar.setBorder(null);
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnBuscar.setBounds(428, 154, 93, 21);
+		btnBuscar.setBounds(708, 105, 35, 34);
 		add(btnBuscar);
 		
 		spnCantidad = new JSpinner();

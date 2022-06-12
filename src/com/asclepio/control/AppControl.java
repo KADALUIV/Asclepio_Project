@@ -66,6 +66,7 @@ public class AppControl implements ActionListener {
 				listaProd = sql.getSearchedProd(palabra);
 				ps.filtrarTabla(listaProd);
 				ps.habComponents(true);
+				
 			} else if (e.getActionCommand().equals(PStock.BTN_REPONER_PSTOCK)) {
 				String idStock = ps.productoSeleccionado();
 				if (idStock != null) {

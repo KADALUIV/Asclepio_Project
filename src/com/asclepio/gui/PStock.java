@@ -30,7 +30,7 @@ public class PStock extends JPanel{
 	public static final String BTN_BUSQUEDA_PSTOCK = "Busqueda";
 	public static final String BTN_REPONER_PSTOCK = "Reponer";
 	
-	private static final String ID_PRODUCTO = "idProducto";
+	private static final String ID_PRODUCTO = "ID-Producto";
 	private static final String NOMBRE = "Nombre";
 	private static final String TIPO = "Tipo";
 	private static final String PRECIO = "Precio";
@@ -73,6 +73,7 @@ public class PStock extends JPanel{
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(38, 185, 872, 328);
+		scrollPane.setVisible(false);
 		add(scrollPane);
 		
 		tblStock = new JTable();
@@ -143,6 +144,7 @@ public class PStock extends JPanel{
 			
 		}
 		
+		scrollPane.setVisible(true);
 	}
 
 	public void hacerVisible(boolean b) {

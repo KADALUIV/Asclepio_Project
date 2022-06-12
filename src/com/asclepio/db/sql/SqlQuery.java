@@ -289,27 +289,27 @@ public class SqlQuery {
 
 		// UPDATE PRODUCTO SET STOCK = STOCK + cantidad WHERE ID_PRODUCTO = idStock
 
+		int result = 0;
 		String query = "UPDATE " + ProductContract.NOMBRE_TABLA + " SET " + ProductContract.COLUMN_STOCK + " = "
-				+ cantidad + " WHERE " + ProductContract.COLUMN_IDPRODUCTO + " = ?";
+				+ ProductContract.COLUMN_STOCK + " + ? " + " WHERE " + ProductContract.COLUMN_IDPRODUCTO + " = ?";
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		ResultSet rlst = null;
 
 		try {
 			con = acceso.getConnection();
-
 			pstmt = con.prepareStatement(query);
 
-			pstmt.setString(1, idStock);
+			pstmt.setInt(1, cantidad);
+			pstmt.setString(2, idStock);
 
-			rlst = pstmt.executeQuery();
+			result = pstmt.executeUpdate();
 
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		} finally {
 			try {
@@ -318,7 +318,7 @@ public class SqlQuery {
 				if (con != null)
 					con.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
 			}
 		}

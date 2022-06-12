@@ -138,7 +138,7 @@ public class AppControl implements ActionListener {
 			if (result <= 0) {
 				pc.setError("Error en la base de datos");
 			} else {
-				JOptionPane.showMessageDialog(pc, "Los datos se actualizaron correctamente", "Resultado de Operaci�n",
+				JOptionPane.showMessageDialog(pc, "Los datos se actualizaron correctamente", "Resultado de Operación",
 						JOptionPane.INFORMATION_MESSAGE);
 			}
 

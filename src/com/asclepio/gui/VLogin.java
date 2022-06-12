@@ -62,18 +62,18 @@ public class VLogin extends JFrame {
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		lblNewLabel_1.setIcon(new ImageIcon(VLogin.class.getResource("/img/image.png")));
-		lblNewLabel_1.setBounds(518, 0, 235, 463);
+		lblNewLabel_1.setBounds(518, 0, 235, 472);
 		getContentPane().add(lblNewLabel_1);
 		
 		JPanel panel = new JPanel(null);
 		panel.setBackground(new Color(68, 174, 178));
-		panel.setBounds(0, 63, 556, 98);
+		panel.setBounds(0, 63, 519, 98);
 		getContentPane().add(panel);
 		
 		JLabel lblNewLabel = new JLabel("A S C L E P I O");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Roboto Medium", Font.BOLD, 38));
-		lblNewLabel.setBounds(171, 31, 267, 37);
+		lblNewLabel.setBounds(171, 31, 299, 37);
 		panel.add(lblNewLabel);
 		lblNewLabel.setForeground(Color.BLACK);
 		

@@ -29,7 +29,7 @@ public class PStock extends JPanel{
 	static final int ALTO = 600;
 	static final int ANCHO = 950;
 	
-	public static final String BTN_BUSQUEDA_PSTOCK = "Busqueda";
+	public static final String BTN_BUSQUEDA_PSTOCK = "";
 	public static final String BTN_REPONER_PSTOCK = "Reponer";
 	
 	private static final String ID_PRODUCTO = "ID-Producto";
@@ -81,10 +81,9 @@ public class PStock extends JPanel{
 		scrollPane.setViewportView(tblStock);
 		
 		
-		btnBuscar = new JButton(BTN_BUSQUEDA_PSTOCK );
-		btnBuscar.setBackground(Color.WHITE);
+		btnBuscar = new JButton(BTN_BUSQUEDA_PSTOCK);
 		btnBuscar.setBorder(null);
-		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnBuscar.setIcon(new ImageIcon(PHistorial.class.getResource("/img/Search.jpeg")));
 		btnBuscar.setBounds(708, 105, 35, 34);
 		add(btnBuscar);
 		

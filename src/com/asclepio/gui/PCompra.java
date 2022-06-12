@@ -114,7 +114,7 @@ public class PCompra extends JPanel {
 		scrpLista.setViewportView(list);
 		dlm = new DefaultListModel<Producto>();
 
-		JLabel lblBusq = new JLabel("B Ú S Q U E D A");
+		JLabel lblBusq = new JLabel("B Ãš S Q U E D A");
 		lblBusq.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBusq.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblBusq.setBounds(88, 68, 335, 35);
@@ -137,7 +137,7 @@ public class PCompra extends JPanel {
 		// ImageIcon(PCompra.class.getResource("/img/carrito.jpg")));
 
 		txtBusq = new JTextField();
-		placeholder = new TextPrompt("Búsqueda", txtBusq);
+		placeholder = new TextPrompt("BÃºsqueda", txtBusq);
 		txtBusq.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		txtBusq.setBounds(331, 22, 287, 35);
 		add(txtBusq);

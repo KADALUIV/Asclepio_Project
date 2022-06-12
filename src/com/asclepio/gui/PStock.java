@@ -66,7 +66,7 @@ public class PStock extends JPanel{
 		add(lblStock);
 		
 		txtBusqueda = new JTextField();
-		placeholder = new TextPrompt("Búsqueda", txtBusqueda);
+		placeholder = new TextPrompt("BÃºsqueda", txtBusqueda);
 		txtBusqueda.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtBusqueda.setBounds(189, 104, 459, 35);
 		add(txtBusqueda);

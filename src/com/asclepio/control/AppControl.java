@@ -77,7 +77,9 @@ public class AppControl implements ActionListener {
 			}else if (e.getActionCommand().equals(VPrincipal.BTN_SEE_STOCK)) {
 				
 				vp.uploadPanel(ps);
+				ps.habComponents(false);
 				vp.hacerVisible(true);
+				
 				
 				
 			}else if (e.getActionCommand().equals(VPrincipal.BTN_REGISTRAR_C)) {
@@ -96,6 +98,7 @@ public class AppControl implements ActionListener {
 			
 		}else if(e.getSource() instanceof JTextField){
 			if (e.getSource().equals(vl.getTxtPwd()) || e.getSource().equals(vl.getTxtUsuario())) {
+				
 				obtenerUsuario();
 				
 			} else if(e.getSource().equals(ph.getTxtFecha())) {

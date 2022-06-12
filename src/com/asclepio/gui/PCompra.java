@@ -87,12 +87,14 @@ public class PCompra extends JPanel {
 		// LOS BOTONES EST�N EN LA MISMA POSICI�N, PARA QUE CUANDO
 		// UN PRODUCTO SEA SELECCIONADO, EL BOT�N COMPRAR SE CAMBIAR� AL
 		// DE ELIMINAR (PONIENDO VISIBLE UNO E INVISIBLE OTRO)
-		btnComprar = new JButton(BTN_COMPRAR);
+		btnComprar = new JButton("");
+		btnComprar.setToolTipText(BTN_COMPRAR);
 		btnComprar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnComprar.setBounds(460, 556, 229, 48);
 		add(btnComprar);
 
-		btnEliminar = new JButton(BTN_ELIMINAR);
+		btnEliminar = new JButton("");
+		btnEliminar.setToolTipText(BTN_ELIMINAR);
 		btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnEliminar.setBounds(699, 556, 229, 48);
 		add(btnEliminar);
@@ -118,7 +120,8 @@ public class PCompra extends JPanel {
 		spinner.setBounds(140, 562, 64, 40);
 		add(spinner);
 
-		btnCarrito = new JButton(BTN_CARRITO);
+		btnCarrito = new JButton("");
+		btnCarrito.setToolTipText(BTN_CARRITO);
 		btnCarrito.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnCarrito.setBounds(263, 556, 114, 48);
 		add(btnCarrito);
@@ -132,9 +135,12 @@ public class PCompra extends JPanel {
 		txtBusq.setColumns(10);
 		txtBusq.setToolTipText("B�squeda");
 
-		btnBusq = new JButton(BTN_BUSQ);
+		btnBusq = new JButton();
+		btnBusq.setToolTipText("Busqueda");
+		btnBusq.setBackground(Color.WHITE);
+		btnBusq.setIcon(new ImageIcon(PCompra.class.getResource("/img/Search.jpeg")));
 		btnBusq.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnBusq.setBounds(647, 9, 60, 48);
+		btnBusq.setBounds(640, 23, 38, 35);
 		add(btnBusq);
 		// btnBusq.setIcon(new ImageIcon(PCompra.class.getResource("/img/lupita.jpg")));
 

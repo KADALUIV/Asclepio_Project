@@ -39,7 +39,7 @@ public class PCompra extends JPanel {
 	public static final String BTN_COMPRAR = "COMPRAR";
 	public static final String BTN_ELIMINAR = "ELIMINAR";
 	public static final String BTN_VOLVER = "VOLVER";
-	public static final String BTN_BUSQ = "B�SQUEDA";
+	public static final String BTN_BUSQ = "Busqueda";
 	public static final String BTN_CARRITO = "CARRITO";
 
 	private JScrollPane scrpCarrito;
@@ -135,7 +135,7 @@ public class PCompra extends JPanel {
 		txtBusq.setColumns(10);
 		txtBusq.setToolTipText("B�squeda");
 
-		btnBusq = new JButton();
+		btnBusq = new JButton("");
 		btnBusq.setToolTipText("Busqueda");
 		btnBusq.setBackground(Color.WHITE);
 		btnBusq.setIcon(new ImageIcon(PCompra.class.getResource("/img/Search.jpeg")));

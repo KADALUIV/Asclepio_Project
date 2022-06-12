@@ -192,15 +192,16 @@ public class SqlQuery {
 			con = this.acceso.getConnection();
 
 			if (fecha == null || fecha.equals("")) {
-				query = "SELECT (P.NOMBRE || ' (' || P.ID_PRODUCTO || ')') AS ID_PRODUCTO, NOMBRE, P.TIPO, STOCK, P.PRECIO, SUM(C.CANTIDAD) AS CANTIDAD_TOTAL"
-						+ " FROM PRODUCTO P, COMPRA C" + " WHERE P.ID_PRODUCTO = C.ID_STOCK"
-						+ " GROUP BY P.ID_PRODUCTO, P.PRECIO";
+				query = "SELECT P.NOMBRE, P.PRECIO, SUM(C.CANTIDAD) AS CANTIDAD_TOTAL, C.FECHA_COMPRA, P.ID_PRODUCTO, P.TIPO"
+						+ " FROM PRODUCTO P, COMPRA C WHERE P.ID_PRODUCTO = C.ID_STOCK"
+						+ " GROUP BY P.NOMBRE, P.TIPO, P.PRECIO, C.FECHA_COMPRA, P.ID_PRODUCTO"
+						+ " ORDER BY C.FECHA_COMPRA";
 
 				pstmt = con.prepareStatement(query);
 			} else {
-				query = "SELECT (P.NOMBRE || ' (' || P.ID_PRODUCTO || ')') AS ID_PRODUCTO, NOMBRE, P.TIPO, STOCK, P.PRECIO, SUM(C.CANTIDAD) AS CANTIDAD_TOTAL"
+				query = "SELECT P.NOMBRE, P.PRECIO, SUM(C.CANTIDAD) AS CANTIDAD_TOTAL, C.FECHA_COMPRA, P.ID_PRODUCTO, P.TIPO"
 						+ " FROM PRODUCTO P, COMPRA C" + " WHERE P.ID_PRODUCTO = C.ID_STOCK" + " AND FECHA_COMPRA = ?"
-						+ " GROUP BY P.ID_PRODUCTO, P.PRECIO";
+						+ " GROUP BY P.NOMBRE, P.TIPO, P.PRECIO, C.FECHA_COMPRA, P.ID_PRODUCTO";
 
 				pstmt = con.prepareStatement(query);
 				pstmt.setString(1, fecha);
@@ -213,11 +214,12 @@ public class SqlQuery {
 				String nombre = rslt.getString("NOMBRE");
 				String tipo = rslt.getString("TIPO");
 				double precio = rslt.getDouble("PRECIO");
-				int stock = rslt.getInt("STOCK");
+				int stock = rslt.getInt("ID_PRODUCTO");
 				int cantidad = rslt.getInt("CANTIDAD_TOTAL");
+				String fechaCompra = rslt.getString("FECHA_COMPRA");
 
 				Producto p = new Producto(id, nombre, tipo, precio, stock);
-				ProductoCompra producto = new ProductoCompra(p, cantidad);
+				ProductoCompra producto = new ProductoCompra(p, cantidad, fechaCompra);
 				productos.add(producto);
 			}
 

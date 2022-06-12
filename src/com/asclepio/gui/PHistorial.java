@@ -34,6 +34,7 @@ public class PHistorial extends JPanel {
 	private static final String COLUMN_NOMBRE = "NOMBRE";
 	private static final String COLUMN_CANTIDAD = "CANTIDAD";
 	private static final String COLUMN_PRECIO = "PRECIO";
+	private static final String COLUMN_FECHA = "FECHA";
 	
 	public static final String BTN_CONSULTAR = "Consultar";
 
@@ -106,12 +107,14 @@ public class PHistorial extends JPanel {
 		dtm.addColumn(COLUMN_NOMBRE);
 		dtm.addColumn(COLUMN_PRECIO);
 		dtm.addColumn(COLUMN_CANTIDAD);
+		dtm.addColumn(COLUMN_FECHA);
 		
 		tblHistorial.setModel(dtm);
 		
 		tblHistorial.getColumn(COLUMN_NOMBRE).setPreferredWidth(120);
 		tblHistorial.getColumn(COLUMN_PRECIO).setPreferredWidth(120);
 		tblHistorial.getColumn(COLUMN_CANTIDAD).setPreferredWidth(120);
+		tblHistorial.getColumn(COLUMN_FECHA).setPreferredWidth(120);
 	
 	}
 	
@@ -151,12 +154,13 @@ public class PHistorial extends JPanel {
 					JOptionPane.INFORMATION_MESSAGE);	
 			
 		} else {	
-			Object[] fila = new Object[3];
+			Object[] fila = new Object[4];
 			
 			for (ProductoCompra p : listaProductos) {
 				fila[0] = p.getProducto().getNombre() + "-" + p.getProducto().getTipo();
 				fila[1] = p.getProducto().getPrecio();
 				fila[2] = p.getCantidad();
+				fila[3] = p.getFechaCompra();
 				
 				dtm.addRow(fila);
 			}

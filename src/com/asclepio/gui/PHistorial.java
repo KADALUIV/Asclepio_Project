@@ -67,6 +67,7 @@ public class PHistorial extends JPanel {
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(111, 164, 768, 342);
+		scrollPane.setVisible(false);
 		add(scrollPane);
 		
 		tblHistorial = new JTable();
@@ -74,6 +75,7 @@ public class PHistorial extends JPanel {
 		
 		txtPrecioTotal = new JTextField();
 		txtPrecioTotal.setEditable(false);
+		txtPrecioTotal.setVisible(false);
 		txtPrecioTotal.setFont(new Font("Tahoma", Font.BOLD, 13));
 		txtPrecioTotal.setBounds(798, 505, 81, 19);
 		add(txtPrecioTotal);
@@ -138,7 +140,7 @@ public class PHistorial extends JPanel {
 			sum = sum + precio * cantidad;
 		}
 
-		txtPrecioTotal.setText(Double.toString(sum) + " ï¿½");
+		txtPrecioTotal.setText(Double.toString(sum) + " €");
 		
 		if (listaProductos.isEmpty()) {
 			mostrarComponentesConsulta(false);
@@ -158,6 +160,8 @@ public class PHistorial extends JPanel {
 			}
 		
 			mostrarComponentesConsulta(true);
+			scrollPane.setVisible(true);
+			txtPrecioTotal.setVisible(true);
 		}
 		
 	}
@@ -173,4 +177,5 @@ public class PHistorial extends JPanel {
 	public JTextField getTxtFecha() {
 		return txtFecha;
 	}
+	
 }

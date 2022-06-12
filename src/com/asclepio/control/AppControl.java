@@ -270,7 +270,7 @@ public class AppControl implements ActionListener {
 		
 		SqlQuery productoContract = new SqlQuery();
 		ArrayList<ProductoCompra> productos = productoContract.consultarProductos(fecha);
-		ph.rellenarTabla(productos);	
+		ph.rellenarTabla(productos);
 		
 	}
 }

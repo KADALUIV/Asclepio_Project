@@ -192,7 +192,7 @@ public class SqlQuery {
 			con = this.acceso.getConnection();
 
 			if (fecha == null || fecha.equals("")) {
-				query = "SELECT (P.NOMBRE || ' (' || P.ID_PRODUCTO || ')') AS ID_PRODUCTO, NOMBRE, P.TIPO, STOCK  P.PRECIO, SUM(C.CANTIDAD) AS CANTIDAD_TOTAL"
+				query = "SELECT (P.NOMBRE || ' (' || P.ID_PRODUCTO || ')') AS ID_PRODUCTO, NOMBRE, P.TIPO, STOCK, P.PRECIO, SUM(C.CANTIDAD) AS CANTIDAD_TOTAL"
 						+ " FROM PRODUCTO P, COMPRA C" + " WHERE P.ID_PRODUCTO = C.ID_STOCK"
 						+ " GROUP BY P.ID_PRODUCTO, P.PRECIO";
 

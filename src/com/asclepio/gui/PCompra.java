@@ -275,7 +275,14 @@ public class PCompra extends JPanel {
 
 	public void removeElements() {
 		carrito.removeAll(carrito);
-		int rows = tModel.getRowCount();
+		int rows = tModel.getRowCount()-1;
+		
+        for (int i = rows; i >= 0; i--) {          
+        tModel.removeRow(tModel.getRowCount()-1);
+        }
+        
+        System.out.println(carrito);
+        
 	
 		
 	}

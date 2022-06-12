@@ -151,7 +151,7 @@ public class VLogin extends JFrame {
 			}
 		
 		}catch (NumberFormatException e) {
-			setError("El Id usuario es numérico");
+			setError("El Id usuario debe ser numérico");
 			cleanData();
 		}
 		

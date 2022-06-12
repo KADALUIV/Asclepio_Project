@@ -113,6 +113,7 @@ public class PStock extends JPanel{
 		
 	}
 	
+	
 	private void configurarTabla() {
 		tModel = new DefaultTableModel() { 
 			public boolean isCellEditable(int row, int colum) {

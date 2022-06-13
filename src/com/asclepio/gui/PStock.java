@@ -138,7 +138,7 @@ public class PStock extends JPanel{
 			row [0] = pro.getIdProducto();
 			row [1] = pro.getNombre();
 			row [2] = pro.getTipo();
-			row [3] = pro.getPrecio() +  "ï¿½";
+			row [3] = pro.getPrecio() +  "€";
 			row [4] = pro.getStock();
 			
 			tModel.addRow(row);
